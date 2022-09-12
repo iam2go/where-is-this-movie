@@ -1,10 +1,23 @@
+import { useCallback, useState } from "react";
 import styled from "styled-components";
+import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
 
 function SearchBox() {
+  const [value, setValue] = useState("");
+  const data = useSearchMovie(value);
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  //   const onClick = useCallback(() => {
+  //     refetch();
+  //   }, [refetch]);
+
   return (
     <div>
       <SearchWrap>
-        <SearchInput placeholder="search.." />
+        <SearchInput placeholder="search.." onChange={onChange} />
       </SearchWrap>
       <SearchButton>
         <i className="fa-solid fa-magnifying-glass"></i>
