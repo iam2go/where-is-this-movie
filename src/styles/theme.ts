@@ -1,5 +1,10 @@
 import baseStyled, { ThemedStyledInterface } from "styled-components";
 
+const color = {
+  background: "#f3f3f3",
+  point: "#f25547",
+};
+
 const common = {
   absoluteCenter: `
         position: absolute;
@@ -22,6 +27,7 @@ const common = {
 
 export const theme = {
   common,
+  color,
 };
 
 export type Theme = typeof theme;

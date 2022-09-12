@@ -4,7 +4,11 @@ import styled from "styled-components";
 function BigLogo() {
   return (
     <Logo>
-      <img src={require("../../../assets/WTM_logo.png")} alt="logo" />
+      <img
+        src={require("../../../assets/WTM_logo.png")}
+        alt="logo"
+        width={"350px"}
+      />
     </Logo>
   );
 }

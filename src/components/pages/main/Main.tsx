@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { BigLogo } from "../../atoms/logo";
+import SearchBox from "../../atoms/searchBox";
 
 function Main() {
   return (
     <Wrap>
       <BigLogo />
+      <SearchBox />
     </Wrap>
   );
 }
@@ -15,7 +17,7 @@ const Wrap = styled.div`
   max-width: 120rem;
   ${({ theme }) => theme.common.absoluteCenter}
   ${({ theme }) => theme.common.flexCenterColumn}
-  background-color: #d8e2dc;
+  background-color: #f3f3f3;
 `;
 
 export default Main;
