@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BigLogo } from "../../atoms/logo";
-import SearchBox from "../../atoms/searchBox";
+import SearchBox from "../../blocks/searchBox";
 
 function Main() {
   return (
