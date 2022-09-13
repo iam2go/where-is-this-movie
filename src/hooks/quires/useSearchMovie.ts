@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { searchMovieList } from "../../apis";
 
 export function useSearchMovie(keyword: string) {
@@ -8,6 +8,7 @@ export function useSearchMovie(keyword: string) {
     {
       enabled: !!keyword,
       retry: false,
+      select: (data) => data.results.slice(0, 10),
     }
   );
 }

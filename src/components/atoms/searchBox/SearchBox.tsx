@@ -1,18 +1,16 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
+import useDebounce from "../../../hooks/useDebounce";
 
 function SearchBox() {
   const [value, setValue] = useState("");
-  const data = useSearchMovie(value);
+  const debouncedValue = useDebounce<string>(value, 500);
+  const { data } = useSearchMovie(debouncedValue);
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   }, []);
-
-  //   const onClick = useCallback(() => {
-  //     refetch();
-  //   }, [refetch]);
 
   return (
     <div>
