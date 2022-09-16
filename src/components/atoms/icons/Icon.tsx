@@ -1,28 +1,35 @@
 import styled from "styled-components";
 
-type IconTypes = "search";
+type IconTypes = "search" | "delete";
 type Props = {
   type: IconTypes;
+  size?: number;
   color?: string;
+};
+
+type StyledProps = {
+  size: number;
+  color: string | undefined;
 };
 
 const iconClassName = {
   search: "fa-magnifying-glass",
+  delete: "fa-circle-xmark",
 };
 
-function Icon({ type, color }: Props) {
+function Icon({ type, color, size = 16 }: Props) {
   return (
-    <IconWrap color={color}>
-      <i className={`fa-solid ${iconClassName[type]}`}></i>
-    </IconWrap>
+    <IconStyle
+      className={`fa-solid ${iconClassName[type]}`}
+      color={color}
+      size={size}
+    ></IconStyle>
   );
 }
 
-const IconWrap = styled.span`
-  i {
-    font-size: 1.6rem;
-    color: ${({ theme, color }) => (color ? color : theme.color.point)};
-  }
+const IconStyle = styled.i<StyledProps>`
+  font-size: ${({ size }) => size}px;
+  color: ${({ theme, color }) => (color ? color : theme.color.point)};
 `;
 
 export default Icon;

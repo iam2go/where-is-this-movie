@@ -8,7 +8,7 @@ export function useSearchMovie(keyword: string) {
     {
       enabled: !!keyword,
       retry: false,
-      select: (data) => data.results.slice(0, 10),
+      select: (data) => data.results.slice(0, 6),
     }
   );
 }

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { BigLogo } from "../../atoms/logo";
-import SearchBox from "../../blocks/searchBox";
+import AutocompleteInput from "../../blocks/AutocompleteInput";
 
 function Main() {
   return (
     <Wrap>
       <BigLogo />
-      <SearchBox />
+      <AutocompleteInput />
     </Wrap>
   );
 }
