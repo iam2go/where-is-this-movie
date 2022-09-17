@@ -8,13 +8,18 @@ import ResultBox, { ResultBoxLoader } from "./ResultBox";
 type Props = {
   width?: string;
   placeholder?: string;
+  onClickResult: (id: number) => void;
 };
 
 type StyledProps = {
   width: string;
 };
 
-function AutocompleteInput({ width = "30rem", placeholder = "" }: Props) {
+function AutocompleteInput({
+  width = "30rem",
+  placeholder = "",
+  onClickResult,
+}: Props) {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce<string>(value, 500);
 
@@ -40,7 +45,9 @@ function AutocompleteInput({ width = "30rem", placeholder = "" }: Props) {
         </IconWrap>
       </InputWrap>
       <Suspense fallback={<ResultBoxLoader />}>
-        {value && <ResultBox keyword={debouncedValue} />}
+        {value && (
+          <ResultBox keyword={debouncedValue} onClick={onClickResult} />
+        )}
       </Suspense>
     </AutocompleteBox>
   );

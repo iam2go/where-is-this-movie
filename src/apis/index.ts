@@ -4,7 +4,7 @@ const TMDB_API = process.env.REACT_APP_TMDB_API;
 const api_key = process.env.REACT_APP_TMDB_KEY;
 
 type MovieData = {
-  [key: string]: string;
+  [key: string]: string | number;
 };
 
 type Response = {
