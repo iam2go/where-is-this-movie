@@ -39,12 +39,14 @@ export function ResultBoxLoader() {
 
 const ResultBoxWrap = styled.div`
   background-color: white;
+  width: 100%;
   height: fit-content;
   padding: 3rem;
   margin-top: -0.8rem;
   box-sizing: border-box;
   border-radius: 0 0 10px 10px;
   padding: 1rem 1.5rem 2rem;
+  position: absolute;
 `;
 
 const ResultItem = styled.div`

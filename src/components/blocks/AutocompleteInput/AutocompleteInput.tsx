@@ -48,16 +48,7 @@ function AutocompleteInput({ width = "30rem", placeholder = "" }: Props) {
 
 const AutocompleteBox = styled.div<StyledProps>`
   width: ${({ width }) => width};
-`;
-
-const SearchWrap = styled.div`
-  width: 30rem;
-  height: 4rem;
-  //border: 1px solid #e7e3e3;
-  border-radius: 10px;
-  background-color: white;
-  display: inline-block;
-  box-shadow: 0 3px 0 #e3e2e2;
+  position: relative;
 `;
 
 const InputWrap = styled.div`
@@ -66,6 +57,7 @@ const InputWrap = styled.div`
   padding: 1rem;
   border-radius: 1rem;
   box-sizing: border-box;
+  box-shadow: 0 3px 0 #e3e2e2;
 `;
 
 const IconWrap = styled.span`
