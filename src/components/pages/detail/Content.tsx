@@ -12,8 +12,9 @@ function Content() {
   const { id } = useParams() as Params;
   return (
     <ContentWrap>
-      <BasicInfo id={id} />
-      <ProviderBox />
+      <BasicInfo id={id}>
+        <ProviderBox id={id} />
+      </BasicInfo>
     </ContentWrap>
   );
 }
