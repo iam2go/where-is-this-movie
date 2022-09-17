@@ -23,7 +23,6 @@ const Wrap = styled.div`
   max-width: 120rem;
   ${({ theme }) => theme.common.absoluteCenter}
   ${({ theme }) => theme.common.flexCenterColumn}
-  background-color: #f3f3f3;
 `;
 
 export default Main;

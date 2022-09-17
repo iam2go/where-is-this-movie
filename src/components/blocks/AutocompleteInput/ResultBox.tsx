@@ -65,7 +65,7 @@ const ResultItem = styled.div`
   }
 
   &:hover {
-    background-color: #dedede;
+    background-color: ${({ theme }) => theme.color.background2};
     cursor: pointer;
   }
 `;

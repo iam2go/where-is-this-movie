@@ -41,7 +41,7 @@ function AutocompleteInput({
           placeholder={placeholder}
         />
         <IconWrap onClick={onClickDelete}>
-          {value ? <Icon type="delete" /> : <Icon type="search" />}
+          {value ? <Icon type="delete" solid /> : <Icon type="search" solid />}
         </IconWrap>
       </InputWrap>
       <Suspense fallback={<ResultBoxLoader />}>

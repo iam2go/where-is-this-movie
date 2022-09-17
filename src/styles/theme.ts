@@ -1,7 +1,8 @@
 import baseStyled, { ThemedStyledInterface } from "styled-components";
 
 const color = {
-  background: "#f3f3f3",
+  background: "#efefef",
+  background2: "#dedede",
   point: "#f25547",
 };
 
@@ -14,7 +15,7 @@ const common = {
     `,
   flexCenter: `
     display: flex;
-    justify-contents: center;
+    justify-content: center;
     align-items: center;
   `,
   flexCenterColumn: `

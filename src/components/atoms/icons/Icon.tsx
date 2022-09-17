@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-type IconTypes = "search" | "delete";
+type IconTypes = "search" | "delete" | "time";
 type Props = {
   type: IconTypes;
   size?: number;
   color?: string;
+  solid?: boolean;
 };
 
 type StyledProps = {
@@ -15,12 +16,13 @@ type StyledProps = {
 const iconClassName = {
   search: "fa-magnifying-glass",
   delete: "fa-circle-xmark",
+  time: "fa-clock",
 };
 
-function Icon({ type, color, size = 16 }: Props) {
+function Icon({ type, color, size = 16, solid = false }: Props) {
   return (
     <IconStyle
-      className={`fa-solid ${iconClassName[type]}`}
+      className={`fa-${solid ? "solid" : "regular"} ${iconClassName[type]}`}
       color={color}
       size={size}
     ></IconStyle>
