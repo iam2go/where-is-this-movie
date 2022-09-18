@@ -7,10 +7,10 @@ type Provider = {
   provider_id: number;
 };
 
+export type ProviderType = "flatrate" | "buy" | "rent";
+
 type ProviderList = {
-  buy?: Provider[];
-  flatrate?: Provider[];
-  rent?: Provider[];
+  [key in ProviderType]?: Provider[];
 };
 
 export function useMovieProvider(movieID: string) {

@@ -77,7 +77,7 @@ const Row = styled.div`
 const Line = styled.div`
   border-bottom: 1px solid #cdcdcd;
   width: 100%;
-  height: 2rem;
+  height: 1.6rem;
 `;
 
 const Title = styled.h1`
