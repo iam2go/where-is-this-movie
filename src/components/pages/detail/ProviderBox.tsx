@@ -34,7 +34,7 @@ function ProviderBox({ id }: Props) {
               {!data[key] && "데이터가 존재하지 않습니다"}
             </StyledTabPanel>
           ))}
-        {!data && "현재 볼 수 있는 곳이 없네요😥"}
+        {!data && <EmptyBox>{"현재 볼 수 있는 곳이 없네요😥"}</EmptyBox>}
       </Tabs>
     </Wrap>
   );
@@ -45,12 +45,6 @@ const Wrap = styled.div`
   height: fit-content;
   flex-grow: 3;
   margin: 2.5rem 0;
-`;
-
-const ResultBox = styled.div`
-  padding: 2rem;
-  border: 2px solid ${({ theme }) => theme.color.background};
-  border-radius: 0.5rem;
 `;
 
 const StyledTab = styled(Tab)`
@@ -75,6 +69,16 @@ const StyledTabPanel = styled(TabPanel)`
   border-radius: 0.5rem;
   display: flex;
   flex-wrap: wrap;
+`;
+
+const EmptyBox = styled.div`
+  border: 2px solid ${({ theme }) => theme.color.background};
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default ProviderBox;
