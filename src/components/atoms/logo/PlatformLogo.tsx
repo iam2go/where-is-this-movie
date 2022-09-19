@@ -7,7 +7,7 @@ type Props = {
 };
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL as string;
-function PlatformLogo({ url, size = 4, style }: Props) {
+function PlatformLogo({ url, size = 2.5, style }: Props) {
   return <Logo url={IMAGE_URL + url} size={size} style={style}></Logo>;
 }
 
@@ -16,7 +16,7 @@ const Logo = styled.div<Props>`
   height: ${({ size }) => size + "rem"};
   background-image: url(${({ url }) => url});
   background-size: cover;
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   display: inline-block;
 `;
 

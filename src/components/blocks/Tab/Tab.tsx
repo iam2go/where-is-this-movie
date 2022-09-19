@@ -38,9 +38,10 @@ function Tab({ id, children, ...delegated }: Omit<Props, "defaultTabId">) {
   );
 }
 
-function TabPanel({ id, children }: Omit<Props, "defaultTabId">) {
+function TabPanel({ id, children, ...delegated }: Omit<Props, "defaultTabId">) {
   const { selected } = useTab();
-  return selected === id ? <div>{children}</div> : null;
+  console.log(selected, id);
+  return selected === id ? <div {...delegated}>{children}</div> : null;
 }
 
 type StyledProps = {
