@@ -17,17 +17,10 @@ function ProviderBox({ id }: Props) {
   const { data } = useMovieProvider(id);
   return (
     <Wrap>
-      <Text>여기서 볼 수 있어요👀</Text>
       <Tabs defaultTabId={"flatrate"}>
-        <Tab id="flatrate">
-          <TabButton>스트리밍</TabButton>
-        </Tab>
-        <Tab id="buy">
-          <TabButton>구매</TabButton>
-        </Tab>
-        <Tab id="rent">
-          <TabButton>대여</TabButton>
-        </Tab>
+        <StyledTab id="flatrate">스트리밍</StyledTab>
+        <StyledTab id="buy">구매</StyledTab>
+        <StyledTab id="rent">대여</StyledTab>
         <ResultBox>
           {data &&
             providerTypes.map((key) => (
@@ -53,18 +46,29 @@ const Wrap = styled.div`
   width: 100%;
   height: fit-content;
   flex-grow: 3;
-  margin: 2rem 0;
-`;
-
-const Text = styled.h2`
-  font-size: 16px;
+  margin: 2.5rem 0;
 `;
 
 const ResultBox = styled.div`
   padding: 2rem;
   border: 2px solid ${({ theme }) => theme.color.background};
-  border-top-color: ${({ theme }) => theme.color.point};
   border-radius: 0.5rem;
+`;
+
+const StyledTab = styled(Tab)`
+  width: fit-content;
+  height: fit-content;
+  padding: 0.6rem 1.4rem;
+  border-radius: 1rem 1rem 0 0;
+  margin-right: 0.7rem;
+  font-family: "LeferiPoint-bold";
+  &:first-child {
+    margin-left: 0.5rem;
+  }
+  &.selected {
+    background-color: ${({ theme }) => theme.color.background};
+    color: ${({ theme }) => theme.color.point};
+  }
 `;
 
 export default ProviderBox;

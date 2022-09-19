@@ -25,11 +25,12 @@ function Tabs({ defaultTabId, children }: Omit<Props, "id">) {
   );
 }
 
-function Tab({ id, children }: Omit<Props, "defaultTabId">) {
+function Tab({ id, children, ...delegated }: Omit<Props, "defaultTabId">) {
   const { selected, setSelected } = useTab();
   return (
     <TabStyle
-      className={cn({ selected: selected === id })}
+      {...delegated}
+      isActive={selected === id}
       onClick={() => setSelected(id)}
     >
       {children}
@@ -39,12 +40,18 @@ function Tab({ id, children }: Omit<Props, "defaultTabId">) {
 
 function TabPanel({ id, children }: Omit<Props, "defaultTabId">) {
   const { selected } = useTab();
-  console.log(selected, id);
   return selected === id ? <div>{children}</div> : null;
 }
 
-const TabStyle = styled.div`
+type StyledProps = {
+  isActive?: boolean;
+};
+
+const TabStyle = styled.div.attrs<StyledProps>((props) => ({
+  className: props.isActive ? "selected" : "",
+}))<StyledProps>`
   display: inline-block;
+  cursor: pointer;
 `;
 
 export default Tabs;
