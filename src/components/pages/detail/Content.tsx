@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { MovieInfo } from "../../../apis";
 import BasicInfo from "./BasicInfo";
 import ProviderBox from "./ProviderBox";
 

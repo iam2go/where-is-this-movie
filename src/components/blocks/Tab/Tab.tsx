@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import useTab from "./hooks/useTab";
 import styled from "styled-components";
-import cn from "classnames";
 
 type Props = {
   defaultTabId: string;
@@ -40,7 +39,6 @@ function Tab({ id, children, ...delegated }: Omit<Props, "defaultTabId">) {
 
 function TabPanel({ id, children, ...delegated }: Omit<Props, "defaultTabId">) {
   const { selected } = useTab();
-  console.log(selected, id);
   return selected === id ? <div {...delegated}>{children}</div> : null;
 }
 

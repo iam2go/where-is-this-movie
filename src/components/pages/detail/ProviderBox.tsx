@@ -1,40 +1,25 @@
+import React, { Suspense } from "react";
 import styled from "styled-components";
-import {
-  ProviderType,
-  useMovieProvider,
-} from "../../../hooks/quires/useMovieProvider";
-import { PlatformLogo } from "../../atoms/logo";
-import PlatformBlock from "../../blocks/PlatformBlock";
-import Tabs, { Tab, TabPanel } from "../../blocks/Tab";
+import Tabs, { Tab } from "../../blocks/Tab";
+
+const ProviderContent = React.lazy(() => import("./ProviderContent"));
 
 type Props = {
   id: string;
 };
 
-const providerTypes = ["buy", "flatrate", "rent"] as ProviderType[];
-
 function ProviderBox({ id }: Props) {
-  const { data } = useMovieProvider(id);
   return (
     <Wrap>
       <Tabs defaultTabId={"flatrate"}>
         <StyledTab id="flatrate">스트리밍</StyledTab>
         <StyledTab id="buy">구매</StyledTab>
         <StyledTab id="rent">대여</StyledTab>
-        {data &&
-          providerTypes.map((key) => (
-            <StyledTabPanel id={key} key={key}>
-              {data[key]?.map(({ logo_path, provider_id, provider_name }) => (
-                <PlatformBlock
-                  key={provider_id}
-                  url={logo_path}
-                  text={provider_name}
-                />
-              ))}
-              {!data[key] && "데이터가 존재하지 않습니다"}
-            </StyledTabPanel>
-          ))}
-        {!data && <EmptyBox>{"현재 볼 수 있는 곳이 없네요😥"}</EmptyBox>}
+        <ContentsWrap>
+          <Suspense fallback={<div>loading...</div>}>
+            <ProviderContent id={id} />
+          </Suspense>
+        </ContentsWrap>
       </Tabs>
     </Wrap>
   );
@@ -63,19 +48,12 @@ const StyledTab = styled(Tab)`
   }
 `;
 
-const StyledTabPanel = styled(TabPanel)`
-  padding: 2rem 1.6rem;
-  border: 2px solid ${({ theme }) => theme.color.background};
-  border-radius: 0.5rem;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const EmptyBox = styled.div`
+const ContentsWrap = styled.div`
   border: 2px solid ${({ theme }) => theme.color.background};
   border-radius: 0.5rem;
   width: 100%;
-  height: 10rem;
+  height: fit-content;
+  min-height: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;

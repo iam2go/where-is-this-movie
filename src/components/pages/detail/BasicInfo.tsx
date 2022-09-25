@@ -23,14 +23,14 @@ function BasicInfo({ id, children }: Props) {
         <Info>
           <Row>
             <Title>{data?.title}</Title>
-            <span>({data?.release_date.split("-")[0]})</span>
+            <span>({data?.release_date?.split("-")[0]})</span>
           </Row>
           <Row>
             <Icons type="time" color="#212426" />
             <span>{data?.runtime + " min"}</span>
           </Row>
           <Row>
-            {data?.genres.map(({ id, name }) => (
+            {data?.genres?.map(({ id, name }) => (
               <Tag key={id} text={name} />
             ))}
           </Row>
@@ -47,6 +47,7 @@ const InfoWrap = styled.div`
   height: fit-content;
   margin: 4rem;
 `;
+
 const Wrap = styled.div`
   ${({ theme }) => theme.common.flexCenter}
 `;
