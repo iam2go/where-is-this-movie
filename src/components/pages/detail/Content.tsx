@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import BasicInfo from "./BasicInfo";
+import DetailLoader from "./DetailLoader";
 import ProviderBox from "./ProviderBox";
 
 type Params = {
@@ -11,9 +13,11 @@ function Content() {
   const { id } = useParams() as Params;
   return (
     <ContentWrap>
-      <BasicInfo id={id}>
-        <ProviderBox id={id} />
-      </BasicInfo>
+      <Suspense fallback={<DetailLoader />}>
+        <BasicInfo id={id}>
+          <ProviderBox id={id} />
+        </BasicInfo>
+      </Suspense>
     </ContentWrap>
   );
 }

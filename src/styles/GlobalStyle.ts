@@ -29,6 +29,15 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         border: none;
     }
+
+    h1, h2{
+        font-family: "LeferiPoint-bold";
+         margin: 0;
+        display: inline-block;
+    }
+    div{
+        font-family: "LeferiPoint";
+    }
 `;
 
 export default GlobalStyle;

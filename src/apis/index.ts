@@ -23,6 +23,7 @@ export type MovieInfo = {
   backdrop_path: string;
   genres: Genres[];
   id: number;
+  tagline: string;
   overview: string;
   poster_path: string;
   release_date: string;

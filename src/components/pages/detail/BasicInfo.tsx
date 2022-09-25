@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
 import Icons from "../../atoms/icons";
+import Quote from "../../atoms/quote";
 import Tag from "../../atoms/tag";
 
 type Props = {
@@ -22,7 +23,7 @@ function BasicInfo({ id, children }: Props) {
         <Poster url={IMAGE_URL + data?.poster_path} />
         <Info>
           <Row>
-            <Title>{data?.title}</Title>
+            <h1>{data?.title}</h1>
             <span>({data?.release_date?.split("-")[0]})</span>
           </Row>
           <Row>
@@ -38,6 +39,11 @@ function BasicInfo({ id, children }: Props) {
           {children}
         </Info>
       </Wrap>
+      <Quote>{data?.tagline}</Quote>
+      <Overview>
+        <h2> 작품 내용</h2>
+        <div className="contents">{data?.overview}</div>
+      </Overview>
     </InfoWrap>
   );
 }
@@ -50,6 +56,7 @@ const InfoWrap = styled.div`
 
 const Wrap = styled.div`
   ${({ theme }) => theme.common.flexCenter}
+  margin-bottom: 5rem;
 `;
 
 const Poster = styled.div<StyleProps>`
@@ -81,10 +88,16 @@ const Line = styled.div`
   height: 1.6rem;
 `;
 
-const Title = styled.h1`
-  font-family: "LeferiPoint-bold";
-  margin: 0;
-  display: inline-block;
+const Overview = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5rem 20rem;
+  .contents {
+    margin-top: 2rem;
+    font-size: 14px;
+    letter-spacing: 0.05rem;
+    line-height: 1.6;
+    text-align: justify;
+  }
 `;
-
 export default BasicInfo;
