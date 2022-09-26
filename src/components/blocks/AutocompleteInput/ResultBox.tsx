@@ -24,6 +24,7 @@ function ResultBox({ keyword, onClick }: Props) {
         data.map((info, index) => (
           <ResultItem key={index} onClick={() => onClick(info.id as number)}>
             {highlightKeyword(info.title as string, keyword)}
+            <sub>({info?.release_date?.toString().split("-")[0]})</sub>
           </ResultItem>
         ))}
     </ResultBoxWrap>
@@ -67,6 +68,11 @@ const ResultItem = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.color.background2};
     cursor: pointer;
+  }
+  sub {
+    vertical-align: baseline;
+    padding-left: 0.1rem;
+    color: #676767;
   }
 `;
 
