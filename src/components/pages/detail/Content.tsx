@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Background from "../../atoms/background";
+import Backdrop from "./Backdrop";
 import BasicInfo from "./BasicInfo";
 import DetailLoader from "./DetailLoader";
 import ProviderBox from "./ProviderBox";
