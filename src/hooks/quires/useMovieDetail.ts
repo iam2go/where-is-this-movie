@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMovieDetail } from "../../apis";
 
 export function useMovieDetail(movieID: string) {
-  return useQuery(["movie-list"], () => getMovieDetail(movieID), {
+  return useQuery(["movie-list", movieID], () => getMovieDetail(movieID), {
     retry: false,
   });
 }

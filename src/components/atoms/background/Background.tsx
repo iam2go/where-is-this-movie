@@ -28,8 +28,8 @@ function Background({ url }: Props) {
     }
 
     context.drawImage(img, 0, 0);
-    let leftData = context.getImageData(0, 0, 40, height).data;
-    let rightData = context.getImageData(width - 40, 0, 40, height).data;
+    let leftData = context.getImageData(0, 0, 30, height).data;
+    let rightData = context.getImageData(width - 30, 0, 30, height).data;
 
     const leftAvgColor = colorQuantization(leftData);
     const rightAvgColor = colorQuantization(rightData);
