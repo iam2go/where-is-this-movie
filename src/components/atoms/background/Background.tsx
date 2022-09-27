@@ -28,8 +28,8 @@ function Background({ url }: Props) {
     }
 
     context.drawImage(img, 0, 0);
-    let leftData = context.getImageData(0, 0, 30, height).data;
-    let rightData = context.getImageData(width - 30, 0, 30, height).data;
+    let leftData = context.getImageData(0, 0, 20, height).data;
+    let rightData = context.getImageData(width - 20, 0, 20, height).data;
 
     const leftAvgColor = colorQuantization(leftData);
     const rightAvgColor = colorQuantization(rightData);
@@ -43,7 +43,13 @@ function Background({ url }: Props) {
         <Left bgColor={leftColor} />
         <div style={{ position: "relative" }}>
           <LeftGradient bgColor={leftColor} />
-          <StyledImage ref={imgRef} src={url} onLoad={readImageData} />
+          <StyledImage
+            ref={imgRef}
+            src={url}
+            alt="poster"
+            onLoad={readImageData}
+            height="400px"
+          />
           <RightGradient bgColor={rightColor} />
         </div>
         <Right bgColor={rightColor} />

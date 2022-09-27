@@ -1,4 +1,5 @@
 import BigLogo from "./BigLogo";
+import SmallLogo from "./SmallLogo";
 import PlatformLogo from "./PlatformLogo";
 
-export { BigLogo, PlatformLogo };
+export { BigLogo, SmallLogo, PlatformLogo };

@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
     }
 
     @font-face {
@@ -13,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
     }
 
     html {
