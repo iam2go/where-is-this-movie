@@ -19,8 +19,8 @@ function Search() {
       {/* <Header /> */}
       <ContentWrap>
         {data?.map((movie) => (
-          <Suspense fallback={<></>}>
-            <SearchItem key={movie.id} data={movie} onClick={onClick} />
+          <Suspense fallback={<></>} key={movie.id}>
+            <SearchItem data={movie} onClick={onClick} />
           </Suspense>
         ))}
       </ContentWrap>

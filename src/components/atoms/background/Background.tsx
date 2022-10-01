@@ -65,6 +65,7 @@ const Wrap = styled.div`
   display: flex;
   width: 100%;
   height: 50rem;
+  position: relative;
 `;
 
 const Left = styled.div<styledProps>`

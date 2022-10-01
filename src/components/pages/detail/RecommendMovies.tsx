@@ -11,7 +11,6 @@ type Props = {
 function RecommendMovies({ id }: Props) {
   const [index, setIndex] = useState(0);
   const { data } = useRecommendMovies(id, index);
-
   const onClick = useCallback(() => {
     if (data && data.totalCount <= index + 1) {
       setIndex(0);
@@ -23,9 +22,11 @@ function RecommendMovies({ id }: Props) {
   return (
     <Wrap>
       <h2>비슷한 작품</h2>
-      <RefreshButton onClick={onClick}>
-        <Icons type={"refresh"} solid color="#212426" size={14} />
-      </RefreshButton>
+      {
+        <RefreshButton onClick={onClick}>
+          <Icons type={"refresh"} solid color="#212426" size={14} />
+        </RefreshButton>
+      }
       <MovieList>
         {data?.list.map((movie) => (
           <MovieItem key={movie.id}>

@@ -14,8 +14,11 @@ type ProviderList = {
 };
 
 export function useMovieProvider(movieID: string) {
-  console.log(movieID);
-  return useQuery(["movie-detail", movieID], () => getMovieProviders(movieID), {
-    select: (data): ProviderList => data.results.KR,
-  });
+  return useQuery(
+    ["movie-provider", movieID],
+    () => getMovieProviders(movieID),
+    {
+      select: (data): ProviderList => data.results.KR,
+    }
+  );
 }

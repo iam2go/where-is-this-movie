@@ -7,7 +7,7 @@ function RecommendMoviesLoader() {
       <h2>비슷한 작품</h2>
       <MovieList>
         {Array.from({ length: 4 }, (_, i) => (
-          <div className="skeleton">
+          <div className="skeleton" key={i}>
             <Skeleton width={18} height={27} />
             <Skeleton width={15} height={2.4} />
           </div>
