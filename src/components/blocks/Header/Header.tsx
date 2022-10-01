@@ -12,13 +12,20 @@ function Header() {
   const onClickResult = (movieID: number) => {
     navigate(`/detail/${movieID}`);
   };
+
+  const onClickMore = (keyword: string) => {
+    navigate(`/search?keyword=${keyword}`);
+  };
   return (
     <StyledHeader>
       <LogoWrap onClick={onClickLogo}>
         <SmallLogo />
       </LogoWrap>
       <SearchWrap>
-        <AutocompleteInput onClickResult={onClickResult} />
+        <AutocompleteInput
+          onClickResult={onClickResult}
+          onClickMore={onClickMore}
+        />
       </SearchWrap>
     </StyledHeader>
   );

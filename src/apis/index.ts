@@ -3,8 +3,12 @@ import axios from "axios";
 const TMDB_API = process.env.REACT_APP_TMDB_API;
 const api_key = process.env.REACT_APP_TMDB_KEY;
 
-type MovieData = {
-  [key: string]: string | number;
+export type MovieData = {
+  id: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  popularity: number;
 };
 
 type Response<T> = {

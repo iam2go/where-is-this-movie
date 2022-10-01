@@ -4,9 +4,10 @@ import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
 type Props = {
   keyword: string;
   onClick: (id: number) => void;
+  onClickMore: (keyword: string) => void;
 };
 
-function ResultBox({ keyword, onClick }: Props) {
+function ResultBox({ keyword, onClick, onClickMore }: Props) {
   const { data } = useSearchMovie(keyword);
   const highlightKeyword = (text: string, keyword: string) => {
     if (!text) {
@@ -17,6 +18,11 @@ function ResultBox({ keyword, onClick }: Props) {
       index % 2 === 1 ? <span key={index}>{part}</span> : part
     );
   };
+
+  const handleClickMore = () => {
+    onClickMore(keyword);
+  };
+
   return (
     <ResultBoxWrap>
       {data?.length === 0 && <p>찾으시는 검색 결과가 없습니다 😥</p>}
@@ -27,6 +33,7 @@ function ResultBox({ keyword, onClick }: Props) {
             <sub>({info?.release_date?.toString().split("-")[0]})</sub>
           </ResultItem>
         ))}
+      {data && <ShowMore onClick={handleClickMore}>show more...</ShowMore>}
     </ResultBoxWrap>
   );
 }
@@ -62,12 +69,21 @@ const ResultItem = styled.div`
 
   span {
     color: ${({ theme }) => theme.color.point};
-    font-weight: bold;
   }
 
   &:hover {
     background-color: ${({ theme }) => theme.color.background2};
     cursor: pointer;
+  }
+`;
+
+const ShowMore = styled.div`
+  text-align: center;
+  padding: 1rem 0 0.9rem;
+  font-size: 13px;
+  cursor: pointer;
+  span {
+    color: ${({ theme }) => theme.color.point};
   }
 `;
 

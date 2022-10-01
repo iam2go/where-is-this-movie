@@ -9,6 +9,7 @@ type Props = {
   width?: string;
   placeholder?: string;
   onClickResult: (id: number) => void;
+  onClickMore: (keyword: string) => void;
 };
 
 type StyledProps = {
@@ -19,6 +20,7 @@ function AutocompleteInput({
   width = "30rem",
   placeholder = "",
   onClickResult,
+  onClickMore,
 }: Props) {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce<string>(value, 500);
@@ -46,7 +48,11 @@ function AutocompleteInput({
       </InputWrap>
       <Suspense fallback={<ResultBoxLoader />}>
         {value && (
-          <ResultBox keyword={debouncedValue} onClick={onClickResult} />
+          <ResultBox
+            keyword={debouncedValue}
+            onClick={onClickResult}
+            onClickMore={onClickMore}
+          />
         )}
       </Suspense>
     </AutocompleteBox>

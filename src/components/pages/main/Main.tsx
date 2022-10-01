@@ -8,11 +8,18 @@ function Main() {
   const onClickResult = (movieID: number) => {
     navigate(`/detail/${movieID}`);
   };
+  const onClickMore = (keyword: string) => {
+    navigate(`/search?keyword=${keyword}`);
+  };
 
   return (
     <Wrap>
       <BigLogo />
-      <AutocompleteInput onClickResult={onClickResult} />
+      <AutocompleteInput
+        onClickResult={onClickResult}
+        onClickMore={onClickMore}
+        placeholder="찾을 영화 제목을 입력해보세요"
+      />
     </Wrap>
   );
 }
