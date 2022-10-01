@@ -13,7 +13,6 @@ function RecommendMovies({ id }: Props) {
   const { data } = useRecommendMovies(id, index);
 
   const onClick = useCallback(() => {
-    console.log(data?.totalCount, index);
     if (data && data.totalCount <= index + 1) {
       setIndex(0);
     } else {
@@ -35,6 +34,9 @@ function RecommendMovies({ id }: Props) {
             <sub>({movie.release_date.split("-")[0]})</sub>
           </MovieItem>
         ))}
+        {(!data || data.totalCount === 0) && (
+          <EmptyBox>비슷한 작품을 찾을 수 없습니다😢 </EmptyBox>
+        )}
       </MovieList>
     </Wrap>
   );
@@ -47,6 +49,7 @@ const Wrap = styled.div`
   box-sizing: border-box;
   padding: 0 20rem;
 `;
+
 const RefreshButton = styled.button`
   width: 2.4rem;
   height: 2.4rem;
@@ -61,9 +64,18 @@ const MovieList = styled.div`
   display: flex;
   margin: 2rem 0;
 `;
+
 const MovieItem = styled.div`
   text-align: center;
   margin: 1rem;
+`;
+
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 8rem;
+  padding-top: 5rem;
+  text-align: center;
+  font-size: 14px;
 `;
 
 export default RecommendMovies;

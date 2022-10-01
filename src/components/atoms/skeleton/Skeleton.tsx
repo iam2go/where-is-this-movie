@@ -4,7 +4,7 @@ type Props = {
   width: number;
   height?: number;
 };
-function Skeleton({ width, height, ...style }: Props) {
+function Skeleton({ width, height }: Props) {
   return <StyledSkeleton width={width} height={height} />;
 }
 

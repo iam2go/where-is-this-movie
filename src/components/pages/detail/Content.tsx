@@ -1,10 +1,12 @@
 import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import BasicInfo from "./BasicInfo";
 import DetailLoader from "./DetailLoader";
 import ProviderBox from "./ProviderBox";
 import RecommendMovies from "./RecommendMovies";
+import RecommendMoviesLoader from "./RecommendMoviesLoader";
 
 type Params = {
   id: string;
@@ -19,7 +21,7 @@ function Content() {
           <ProviderBox id={id} />
         </BasicInfo>
       </Suspense>
-      <Suspense fallback={<></>}>
+      <Suspense fallback={<RecommendMoviesLoader />}>
         <RecommendMovies id={id} />
       </Suspense>
     </ContentWrap>
