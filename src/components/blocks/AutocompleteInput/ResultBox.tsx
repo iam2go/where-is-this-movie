@@ -69,11 +69,6 @@ const ResultItem = styled.div`
     background-color: ${({ theme }) => theme.color.background2};
     cursor: pointer;
   }
-  sub {
-    vertical-align: baseline;
-    padding-left: 0.1rem;
-    color: #676767;
-  }
 `;
 
 export default ResultBox;

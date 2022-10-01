@@ -4,7 +4,6 @@ import Content from "./Content";
 
 const Backdrop = React.lazy(() => import("./Backdrop"));
 function Detail() {
-  // const { data: provider } = useMovieProvider(id);
   return (
     <>
       <Header />

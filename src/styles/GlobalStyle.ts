@@ -37,8 +37,18 @@ const GlobalStyle = createGlobalStyle`
          margin: 0;
         display: inline-block;
     }
+    h3{
+        margin: 1rem 0 0;
+        display: inline-block;
+        font-weight: 400;
+    }
     div{
         font-family: "LeferiPoint";
+    }
+    sub{
+    vertical-align: baseline;
+    padding-left: 0.1rem;
+    color: #676767;
     }
 `;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-type IconTypes = "search" | "delete" | "time";
+type IconTypes = "search" | "delete" | "time" | "refresh";
 type Props = {
   type: IconTypes;
   size?: number;
@@ -17,6 +17,7 @@ const iconClassName = {
   search: "fa-magnifying-glass",
   delete: "fa-circle-xmark",
   time: "fa-clock",
+  refresh: "fa-arrow-rotate-right",
 };
 
 function Icon({ type, color, size = 16, solid = false }: Props) {

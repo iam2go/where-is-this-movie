@@ -4,12 +4,12 @@ const TMDB_API = process.env.REACT_APP_TMDB_API;
 const api_key = process.env.REACT_APP_TMDB_KEY;
 
 type MovieData = {
-  [key: string]: unknown;
+  [key: string]: string | number;
 };
 
-type Response = {
+type Response<T> = {
   page: number;
-  results: MovieData[];
+  results: T;
   total_pages: number;
   total_results: number;
 };
@@ -32,9 +32,12 @@ export type MovieInfo = {
 };
 
 const searchMovieList = async (params: object) => {
-  const response = await axios.get<Response>(`${TMDB_API}/search/movie`, {
-    params: { api_key, language: "ko-KR", ...params },
-  });
+  const response = await axios.get<Response<MovieData[]>>(
+    `${TMDB_API}/search/movie`,
+    {
+      params: { api_key, language: "ko-KR", ...params },
+    }
+  );
   return response.data;
 };
 
@@ -55,4 +58,20 @@ const getMovieProviders = async (movieID: string) => {
   return response.data;
 };
 
-export { searchMovieList, getMovieDetail, getMovieProviders };
+const getRecommendMovies = async (movieID: string) => {
+  console.log(">>");
+  const response = await axios.get<Response<MovieInfo[]>>(
+    `${TMDB_API}/movie/${movieID}/recommendations`,
+    {
+      params: { api_key, language: "ko-KR" },
+    }
+  );
+  return response.data;
+};
+
+export {
+  searchMovieList,
+  getMovieDetail,
+  getMovieProviders,
+  getRecommendMovies,
+};

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
 import Icons from "../../atoms/icons";
+import Poster from "../../atoms/poster/Poster";
 import Quote from "../../atoms/quote";
 import Tag from "../../atoms/tag";
 
@@ -9,18 +10,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-type StyleProps = {
-  url: string;
-};
-
-const IMAGE_URL = process.env.REACT_APP_IMAGE_URL as string;
-
 function BasicInfo({ id, children }: Props) {
   const { data } = useMovieDetail(id);
   return (
     <InfoWrap>
       <Wrap>
-        <Poster url={IMAGE_URL + data?.poster_path} />
+        <Poster url={data?.poster_path} />
         <Info>
           <Row>
             <h1>{data?.title}</h1>
@@ -57,14 +52,6 @@ const InfoWrap = styled.div`
 const Wrap = styled.div`
   ${({ theme }) => theme.common.flexCenter}
   margin-bottom: 5rem;
-`;
-
-const Poster = styled.div<StyleProps>`
-  width: 16rem;
-  height: 23rem;
-  background-image: url(${({ url }) => url});
-  background-size: cover;
-  border-radius: 15px;
 `;
 
 const Info = styled.div`
