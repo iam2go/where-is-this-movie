@@ -63,7 +63,6 @@ const getMovieProviders = async (movieID: string) => {
 };
 
 const getRecommendMovies = async (movieID: string) => {
-  console.log(">>");
   const response = await axios.get<Response<MovieInfo[]>>(
     `${TMDB_API}/movie/${movieID}/recommendations`,
     {

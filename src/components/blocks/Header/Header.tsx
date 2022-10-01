@@ -34,7 +34,7 @@ function Header() {
 const StyledHeader = styled.div`
   width: 100%;
   height: 6rem;
-  position: fixed;
+  position: relative;
   top: 0;
   background-color: ${({ theme }) => theme.color.background};
   z-index: 333;

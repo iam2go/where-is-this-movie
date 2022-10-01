@@ -1,4 +1,5 @@
-import { useSearchParams } from "react-router-dom";
+import { Suspense } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
 import Header from "../../blocks/Header";
@@ -8,12 +9,19 @@ function Search() {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("keyword") as string;
   const { data } = useSearchMovie(keyword, true);
+  const navigate = useNavigate();
+
+  const onClick = (movieID: number) => {
+    navigate(`/detail/${movieID}`);
+  };
   return (
     <>
       {/* <Header /> */}
       <ContentWrap>
         {data?.map((movie) => (
-          <SearchItem key={movie.id} data={movie} />
+          <Suspense fallback={<></>}>
+            <SearchItem key={movie.id} data={movie} onClick={onClick} />
+          </Suspense>
         ))}
       </ContentWrap>
     </>
