@@ -34,7 +34,7 @@ function BasicInfo({ id, children }: Props) {
           {children}
         </Info>
       </Wrap>
-      <Quote>{data?.tagline}</Quote>
+      {data?.tagline && <Quote>{data.tagline}</Quote>}
       <Overview>
         <h2> 작품 내용</h2>
         <div className="contents">{data?.overview}</div>

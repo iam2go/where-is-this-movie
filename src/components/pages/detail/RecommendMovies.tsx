@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
 import { useRecommendMovies } from "../../../hooks/quires/useRecommendMovies";
 import Icons from "../../atoms/icons";
 import Poster from "../../atoms/poster";
@@ -10,8 +11,9 @@ type Props = {
 
 function RecommendMovies({ id }: Props) {
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
   const { data } = useRecommendMovies(id, index);
-  const onClick = useCallback(() => {
+  const onClickRefresh = useCallback(() => {
     if (data && data.totalCount <= index + 1) {
       setIndex(0);
     } else {
@@ -19,17 +21,25 @@ function RecommendMovies({ id }: Props) {
     }
   }, [data, index]);
 
+  const onClickMovieItem = useCallback(
+    (movieID: number) => {
+      if (!movieID) return;
+      navigate(`/detail/${movieID}`);
+    },
+    [navigate]
+  );
+
   return (
     <Wrap>
       <h2>비슷한 작품</h2>
       {
-        <RefreshButton onClick={onClick}>
+        <RefreshButton onClick={onClickRefresh}>
           <Icons type={"refresh"} solid color="#212426" size={14} />
         </RefreshButton>
       }
       <MovieList>
         {data?.list.map((movie) => (
-          <MovieItem key={movie.id}>
+          <MovieItem key={movie.id} onClick={() => onClickMovieItem(movie.id)}>
             <Poster url={movie.poster_path} />
             <h3>{movie.title}</h3>
             <sub>({movie.release_date.split("-")[0]})</sub>
@@ -59,6 +69,21 @@ const RefreshButton = styled.button`
   border-radius: 2.5rem;
   margin-left: 1rem;
   padding: 0.5rem 0;
+  &:hover {
+    i {
+      animation: rotate 1s infinite;
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 const MovieList = styled.div`
@@ -69,6 +94,7 @@ const MovieList = styled.div`
 const MovieItem = styled.div`
   text-align: center;
   margin: 1rem;
+  cursor: pointer;
 `;
 
 const EmptyBox = styled.div`
