@@ -3,19 +3,24 @@ import styled from "styled-components";
 import { MovieData } from "../../../apis";
 import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
 import Poster from "../../atoms/poster";
+import { HighlightWord } from "../../atoms/text";
 import ProviderList from "./ProviderList";
 
 type Props = {
   data: MovieData;
   onClick: (id: number) => void;
+  keyword: string;
 };
-function SearchItem({ data, onClick }: Props) {
+function SearchItem({ data, onClick, keyword }: Props) {
   const { data: info } = useMovieDetail(data.id.toString());
+
   return (
     <Wrap onClick={() => onClick(data.id)}>
       <Poster url={data.poster_path} width={10} />
       <InfoBox>
-        <h2>{data.title}</h2>
+        <h2>
+          <HighlightWord text={data.title} keyword={keyword} />
+        </h2>
         <sub>({data.release_date.split("-")[0]})</sub>
         <Suspense fallback={<></>}>
           <ProviderList id={data.id} />
@@ -45,6 +50,9 @@ const InfoBox = styled.div`
   text-align: left;
   h2 {
     margin-right: 0.5rem;
+    span {
+      color: ${({ theme }) => theme.color.point};
+    }
   }
 `;
 

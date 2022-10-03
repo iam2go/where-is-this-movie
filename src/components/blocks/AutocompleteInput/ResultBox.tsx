@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
+import { HighlightWord } from "../../atoms/text";
 
 type Props = {
   keyword: string;
@@ -29,11 +30,13 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
       {data &&
         data.map((info, index) => (
           <ResultItem key={index} onClick={() => onClick(info.id as number)}>
-            {highlightKeyword(info.title as string, keyword)}
+            <HighlightWord text={info.title as string} keyword={keyword} />
             <sub>({info?.release_date?.toString().split("-")[0]})</sub>
           </ResultItem>
         ))}
-      {data && <ShowMore onClick={handleClickMore}>show more...</ShowMore>}
+      {data?.length !== 0 && (
+        <ShowMore onClick={handleClickMore}>show more...</ShowMore>
+      )}
     </ResultBoxWrap>
   );
 }
