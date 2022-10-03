@@ -6,7 +6,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const IMAGE_URL = process.env.REACT_APP_IMAGE_URL as string;
+const IMAGE_URL = (process.env.REACT_APP_IMAGE_URL + "/w45") as string;
 function PlatformLogo({ url, size = 2.5, style }: Props) {
   return <Logo url={IMAGE_URL + url} size={size} style={style}></Logo>;
 }
