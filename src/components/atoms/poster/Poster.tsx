@@ -12,7 +12,8 @@ function Poster({ url, width = 18 }: Props) {
     IMAGE_URL + "/w92" + url,
     IMAGE_URL + "/w185" + url
   );
-  return <StyledPoster blur={blur} url={src} width={width} />;
+
+  return url ? <StyledPoster blur={blur} url={src} width={width} /> : null;
 }
 
 type StyleProps = {
