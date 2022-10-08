@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
 import { HighlightWord } from "../../atoms/text";
@@ -19,8 +19,6 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      console.log(e);
-      console.log(e.key);
       if (!data || data.length === 0) return;
 
       if (e.code === "Enter") {
@@ -53,7 +51,9 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
             tabIndex={0}
           >
             <HighlightWord text={info.title as string} keyword={keyword} />
-            <sub>({info?.release_date?.toString().split("-")[0]})</sub>
+            {info?.release_date && (
+              <sub>({info?.release_date?.toString().split("-")[0]})</sub>
+            )}
           </ResultItem>
         ))}
       {data && data?.length !== 0 && (

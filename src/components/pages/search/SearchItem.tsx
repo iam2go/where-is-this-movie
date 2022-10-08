@@ -21,7 +21,7 @@ function SearchItem({ data, onClick, keyword }: Props) {
         <h2>
           <HighlightWord text={data.title} keyword={keyword} />
         </h2>
-        <sub>({data.release_date.split("-")[0]})</sub>
+        {data.release_date && <sub>({data.release_date.split("-")[0]})</sub>}
         <Suspense fallback={<></>}>
           <ProviderList id={data.id} />
         </Suspense>

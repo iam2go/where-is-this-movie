@@ -19,7 +19,9 @@ function BasicInfo({ id, children }: Props) {
         <Info>
           <Row>
             <h1>{data?.title}</h1>
-            <span>({data?.release_date?.split("-")[0]})</span>
+            {data?.release_date && (
+              <span>({data?.release_date?.split("-")[0]})</span>
+            )}
           </Row>
           <Row>
             <Icons type="time" color="#212426" />
@@ -37,7 +39,9 @@ function BasicInfo({ id, children }: Props) {
       {data?.tagline && <Quote>{data.tagline}</Quote>}
       <Overview>
         <h2> 작품 내용</h2>
-        <div className="contents">{data?.overview}</div>
+        <div className="contents">
+          {data?.overview || "작품 내용이 없습니다."}
+        </div>
       </Overview>
     </InfoWrap>
   );

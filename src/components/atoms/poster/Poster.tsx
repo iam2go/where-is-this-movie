@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useProgressiveImg from "../../../hooks/useProgressiveImg";
+import Icons from "../icons";
 
 type Props = {
   url: string | undefined;
@@ -13,7 +14,13 @@ function Poster({ url, width = 18 }: Props) {
     IMAGE_URL + "/w185" + url
   );
 
-  return url ? <StyledPoster blur={blur} url={src} width={width} /> : null;
+  return url ? (
+    <StyledPoster blur={blur} url={src} width={width} />
+  ) : (
+    <EmptyImage width={width}>
+      <Icons type="image" color={"rgba(255, 255, 255, 0.5)"} size={25} />
+    </EmptyImage>
+  );
 }
 
 type StyleProps = {
@@ -28,6 +35,17 @@ const StyledPoster = styled.div<StyleProps>`
   border-radius: 15px;
   filter: ${({ blur }) => (blur ? "blur(20px)" : "none")};
   transition: ${({ blur }) => (blur ? "none" : "filter 0.3s ease-out")};
+`;
+
+const EmptyImage = styled.div<Required<Pick<Props, "width">>>`
+  width: ${({ width }) => width + "rem"};
+  height: ${({ width }) => (width / 2) * 3 + "rem"};
+  background-color: #cdcdcd;
+  border-radius: 15px;
+  position: relative;
+  i {
+    ${({ theme }) => theme.common.absoluteCenter}
+  }
 `;
 
 export default Poster;
