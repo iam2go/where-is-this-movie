@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
 import { HighlightWord } from "../../atoms/text";
 
@@ -10,32 +11,59 @@ type Props = {
 
 function ResultBox({ keyword, onClick, onClickMore }: Props) {
   const { data } = useSearchMovie(keyword);
-  const highlightKeyword = (text: string, keyword: string) => {
-    if (!text) {
-      return;
-    }
-    const parts = text.split(new RegExp(`(${keyword})`, "gi"));
-    return parts.map((part, index) =>
-      index % 2 === 1 ? <span key={index}>{part}</span> : part
-    );
-  };
+  const [selected, setSelected] = useState(-1);
 
   const handleClickMore = () => {
     onClickMore(keyword);
   };
+
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      console.log(e);
+      console.log(e.key);
+      if (!data || data.length === 0) return;
+
+      if (e.code === "Enter") {
+        onClick(data[selected].id);
+      }
+      if (e.key === "ArrowUp") {
+        setSelected((prev) => (prev > 0 ? prev - 1 : -1));
+        return;
+      }
+      if (e.key === "ArrowDown") {
+        setSelected((prev) => (prev <= data!.length ? prev + 1 : -1));
+      }
+    };
+    window.addEventListener("keyup", listener);
+    return () => {
+      window.removeEventListener("keyup", listener);
+    };
+  }, [data, onClick, selected]);
 
   return (
     <ResultBoxWrap>
       {data?.length === 0 && <p>찾으시는 검색 결과가 없습니다 😥</p>}
       {data &&
         data.map((info, index) => (
-          <ResultItem key={index} onClick={() => onClick(info.id as number)}>
+          <ResultItem
+            key={index}
+            onMouseEnter={() => setSelected(-1)}
+            onClick={() => onClick(info.id as number)}
+            active={selected === index}
+            tabIndex={0}
+          >
             <HighlightWord text={info.title as string} keyword={keyword} />
             <sub>({info?.release_date?.toString().split("-")[0]})</sub>
           </ResultItem>
         ))}
-      {data?.length !== 0 && (
-        <ShowMore onClick={handleClickMore}>show more...</ShowMore>
+      {data && data?.length !== 0 && (
+        <ShowMore
+          tabIndex={0}
+          active={selected === data.length}
+          onClick={handleClickMore}
+        >
+          show more...
+        </ShowMore>
       )}
     </ResultBoxWrap>
   );
@@ -66,13 +94,21 @@ const ResultBoxWrap = styled.div`
   }
 `;
 
-const ResultItem = styled.div`
+type StyledProps = {
+  active: boolean;
+};
+const ResultItem = styled.div<StyledProps>`
   font-size: 1.4rem;
   padding: 1.2rem 1.5rem;
 
   span {
     color: ${({ theme }) => theme.color.point};
   }
+  ${({ active }) =>
+    active &&
+    css`
+      background-color: ${({ theme }) => theme.color.background2};
+    `}
 
   &:hover {
     background-color: ${({ theme }) => theme.color.background2};
@@ -80,12 +116,17 @@ const ResultItem = styled.div`
   }
 `;
 
-const ShowMore = styled.div`
+const ShowMore = styled.div<StyledProps>`
   text-align: center;
   padding: 1rem 0 0.9rem;
   font-size: 13px;
   cursor: pointer;
-  span {
+  ${({ active }) =>
+    active &&
+    css`
+      color: ${({ theme }) => theme.color.point};
+    `}
+  &:hover {
     color: ${({ theme }) => theme.color.point};
   }
 `;
