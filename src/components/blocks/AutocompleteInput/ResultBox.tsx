@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
 import { HighlightWord } from "../../atoms/text";
@@ -13,16 +13,20 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
   const { data } = useSearchMovie(keyword);
   const [selected, setSelected] = useState(-1);
 
-  const handleClickMore = () => {
+  const handleClickMore = useCallback(() => {
     onClickMore(keyword);
-  };
+  }, [keyword, onClickMore]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       if (!data || data.length === 0) return;
 
       if (e.code === "Enter") {
-        onClick(data[selected].id);
+        if (selected === data.length) {
+          handleClickMore();
+        } else {
+          onClick(data[selected].id);
+        }
       }
       if (e.key === "ArrowUp") {
         setSelected((prev) => (prev > 0 ? prev - 1 : -1));
