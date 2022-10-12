@@ -1,3 +1,4 @@
 import TabButton from "./TabButton";
+import Button from "./Button";
 
-export { TabButton };
+export { TabButton, Button };
