@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CheckJongsung } from "../../../utils/hangul";
 import Header from "../../blocks/Header";
 import SearchList from "./SearchList";
+import SearchLoader from "./SearchLoader";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -17,7 +18,7 @@ function Search() {
           <h2>'{keyword}'</h2>
           {CheckJongsung(keyword, "으로", "로")} 검색한 결과입니다
         </Text>
-        <Suspense fallback={<></>}>
+        <Suspense fallback={<SearchLoader />}>
           <SearchList keyword={keyword} />
         </Suspense>
       </ContentWrap>
