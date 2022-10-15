@@ -1,6 +1,7 @@
 import { Suspense, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { useInfiniteSearch } from "../../../hooks/quires/useSearchMovie";
 import SearchItem from "./SearchItem";
 
@@ -29,9 +30,20 @@ function SearchList({ keyword }: Props) {
           <SearchItem data={movie} onClick={onClick} keyword={keyword} />
         </Suspense>
       ))}
+      {data && data.pages[0].total_pages > 1 && !hasNextPage && (
+        <AlertMessage>모든 결과를 조회하셨습니다</AlertMessage>
+      )}
+      {data?.pages[0].total_results === 0 && (
+        <AlertMessage>키워드와 일치하는 영화가 없습니다😥</AlertMessage>
+      )}
       <div ref={ref} />
     </>
   );
 }
+
+const AlertMessage = styled.div`
+  font-size: 16px;
+  margin: 5rem 0;
+`;
 
 export default SearchList;
