@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useRecommendMovies } from "../../../hooks/quires/useRecommendMovies";
 import Icons from "../../atoms/icons";
 import Poster from "../../atoms/poster";
@@ -14,7 +14,7 @@ function RecommendMovies({ id }: Props) {
   const navigate = useNavigate();
   const { data } = useRecommendMovies(id, index);
   const onClickRefresh = useCallback(() => {
-    if (data && data.totalCount <= index + 1) {
+    if (data && data.totalCount <= index + 4) {
       setIndex(0);
     } else {
       setIndex((prev) => prev + 4);
