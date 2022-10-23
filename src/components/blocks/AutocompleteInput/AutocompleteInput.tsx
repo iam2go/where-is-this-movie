@@ -1,9 +1,10 @@
-import { Suspense, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import styled from "styled-components";
 import Input from "../../atoms/input";
 import Icon from "../../atoms/icons";
 import useDebounce from "../../../hooks/useDebounce";
 import ResultBox, { ResultBoxLoader } from "./ResultBox";
+import useOutsideClick from "../../../hooks/useOutsideClick";
 
 type Props = {
   width?: string;
@@ -23,6 +24,8 @@ function AutocompleteInput({
   onClickMore,
 }: Props) {
   const [value, setValue] = useState("");
+  const [hideResult, setHideResult] = useState(false);
+  const inputRef = useRef(null);
   const debouncedValue = useDebounce<string>(value, 500);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,21 +36,32 @@ function AutocompleteInput({
     setValue("");
   };
 
+  const onFocus = () => {
+    setHideResult(false);
+  };
+
+  const handleClickOutside = () => {
+    setHideResult(true);
+  };
+
+  useOutsideClick(inputRef, handleClickOutside);
+
   return (
-    <AutocompleteBox width={width}>
+    <AutocompleteBox width={width} ref={inputRef}>
       <InputWrap>
         <Input
           value={value}
           onChange={onChange}
           width={`calc(${width} - 5rem)`}
           placeholder={placeholder}
+          onFocus={onFocus}
         />
         <IconWrap onClick={onClickDelete}>
           {value ? <Icon type="delete" solid /> : <Icon type="search" solid />}
         </IconWrap>
       </InputWrap>
       <Suspense fallback={<ResultBoxLoader />}>
-        {value && (
+        {value && !hideResult && (
           <ResultBox
             keyword={debouncedValue}
             onClick={onClickResult}

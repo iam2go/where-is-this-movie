@@ -6,14 +6,22 @@ type Props = {
   placeholder?: string;
   width?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: () => void;
 };
-function Input({ value, placeholder = "", width = "25rem", onChange }: Props) {
+function Input({
+  value,
+  placeholder = "",
+  width = "25rem",
+  onChange,
+  onFocus,
+}: Props) {
   return (
     <InputStyle
       value={value}
       placeholder={placeholder}
       onChange={onChange}
       width={width}
+      onFocus={onFocus}
     />
   );
 }
