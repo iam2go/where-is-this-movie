@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { CheckJongsung } from "../../../utils/hangul";
 import Header from "../../blocks/Header";
+import TopButton from "../../blocks/TopButton";
 import SearchList from "./SearchList";
 import SearchLoader from "./SearchLoader";
 
@@ -22,6 +23,7 @@ function Search() {
           <SearchList keyword={keyword} />
         </Suspense>
       </ContentWrap>
+      <TopButton />
     </>
   );
 }

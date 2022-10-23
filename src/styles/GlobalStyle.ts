@@ -23,9 +23,10 @@ const GlobalStyle = createGlobalStyle`
     body{
         margin: 0;
         font-size: 12px;
-        width: 100vw;
+        width: 99vw;
         height: 100vh;
         background-color: #efefef;
+        box-sizing: border-box;
     }
     button{
         cursor: pointer;

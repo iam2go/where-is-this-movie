@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-type IconTypes = "search" | "delete" | "time" | "refresh" | "image";
+type IconTypes = "search" | "delete" | "time" | "refresh" | "image" | "up";
 type Props = {
   type: IconTypes;
   size?: number;
@@ -19,6 +19,7 @@ const iconClassName = {
   time: "fa-clock",
   refresh: "fa-arrow-rotate-right",
   image: "fa-image",
+  up: "fa-arrow-up",
 };
 
 function Icon({ type, color, size = 16, solid = false }: Props) {
