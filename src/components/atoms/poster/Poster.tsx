@@ -9,10 +9,9 @@ type Props = {
 
 const IMAGE_URL = process.env.REACT_APP_IMAGE_URL as string;
 function Poster({ url, width = 18 }: Props) {
-  const [src, blur] = useProgressiveImg(
-    IMAGE_URL + "/w92" + url,
-    IMAGE_URL + "/w185" + url
-  );
+  const lowImageUrl = url ? IMAGE_URL + "/w92" + url : "";
+  const highImageUrl = url ? IMAGE_URL + "/w185" + url : "";
+  const [src, blur] = useProgressiveImg(lowImageUrl, highImageUrl);
 
   return url ? (
     <StyledPoster blur={blur} url={src} width={width} />
