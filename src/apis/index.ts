@@ -17,7 +17,9 @@ type Response<T> = {
   total_pages: number;
   total_results: number;
 };
-
+type ResponseGenres = {
+  genres: Genres[];
+};
 type Genres = {
   id: number;
   name: string;
@@ -33,13 +35,6 @@ export type MovieInfo = {
   release_date: string;
   runtime: 124;
   title: string;
-};
-
-export type Provider = {
-  display_priority: number;
-  logo_path: string;
-  provider_name: string;
-  provider_id: number;
 };
 
 const searchMovieList = async (params: object) => {
@@ -79,14 +74,14 @@ const getRecommendMovies = async (movieID: string) => {
   return response.data;
 };
 
-const getProviderList = async () => {
-  const response = await axios.get<Response<Provider>>(
-    `${TMDB_API}/watch/providers/movie`,
+const getGenreList = async () => {
+  const response = await axios.get<ResponseGenres>(
+    `${TMDB_API}/genre/movie/list`,
     {
-      params: { api_key, language: "ko-KR", watch_region: "KR" },
+      params: { api_key, language: "ko-KR" },
     }
   );
-  return response.data;
+  return response.data.genres;
 };
 
 export {
@@ -94,5 +89,5 @@ export {
   getMovieDetail,
   getMovieProviders,
   getRecommendMovies,
-  getProviderList,
+  getGenreList,
 };

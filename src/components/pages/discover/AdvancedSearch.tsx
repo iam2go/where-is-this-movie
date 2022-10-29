@@ -1,18 +1,8 @@
-import { useEffect } from "react";
 import styled from "styled-components";
-import { getProviderList } from "../../../apis";
 import Header from "../../blocks/Header";
 import SearchOption from "../../blocks/SearchOption";
 
 function Discover() {
-  useEffect(() => {
-    let fetch = async () => {
-      const data = await getProviderList();
-      console.log(data);
-    };
-    fetch();
-  }, []);
-
   return (
     <>
       <Header />

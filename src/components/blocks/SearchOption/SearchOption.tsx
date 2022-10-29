@@ -1,8 +1,11 @@
+import { Suspense } from "react";
 import styled from "styled-components";
+import { useGenreList } from "../../../hooks/quires/useGenreList";
 import { Button } from "../../atoms/button";
 import Option from "../../atoms/option";
 
 function SearchOption() {
+  const { data: genres } = useGenreList();
   return (
     <Wrap>
       <OptionBox>
@@ -14,11 +17,11 @@ function SearchOption() {
       </OptionBox>
       <OptionBox>
         <h2>장르</h2>
-        {["액션", "스릴러", "드라마", "코미디", "로맨스", "가족", "공포"].map(
-          (genre) => (
-            <Option key={genre}>{genre}</Option>
-          )
-        )}
+        <Suspense fallback={<>Loading...</>}>
+          {genres?.map((genre) => (
+            <Option key={genre.id}>{genre.name}</Option>
+          ))}
+        </Suspense>
       </OptionBox>
       <OptionBox>
         <h2>국가</h2>
