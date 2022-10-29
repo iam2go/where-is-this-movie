@@ -35,6 +35,13 @@ export type MovieInfo = {
   title: string;
 };
 
+export type Provider = {
+  display_priority: number;
+  logo_path: string;
+  provider_name: string;
+  provider_id: number;
+};
+
 const searchMovieList = async (params: object) => {
   const response = await axios.get<Response<MovieData[]>>(
     `${TMDB_API}/search/movie`,
@@ -72,9 +79,20 @@ const getRecommendMovies = async (movieID: string) => {
   return response.data;
 };
 
+const getProviderList = async () => {
+  const response = await axios.get<Response<Provider>>(
+    `${TMDB_API}/watch/providers/movie`,
+    {
+      params: { api_key, language: "ko-KR", watch_region: "KR" },
+    }
+  );
+  return response.data;
+};
+
 export {
   searchMovieList,
   getMovieDetail,
   getMovieProviders,
   getRecommendMovies,
+  getProviderList,
 };
