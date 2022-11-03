@@ -4,15 +4,18 @@ import cn from "classnames";
 
 type Props = {
   children: React.ReactNode;
+  onClick?: (id: number, active: boolean) => void;
+  id: number;
 };
-function Option({ children }: Props) {
+function Option({ children, onClick, id }: Props) {
   const [active, setActive] = useState(false);
 
-  const onClick = useCallback(() => {
+  const handleClick = useCallback(() => {
+    onClick?.(id, !active);
     setActive((prev) => !prev);
-  }, []);
+  }, [active, id, onClick]);
   return (
-    <Block className={cn({ active })} onClick={onClick}>
+    <Block className={cn({ active })} onClick={handleClick}>
       {children}
     </Block>
   );

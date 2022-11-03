@@ -4,19 +4,21 @@ import { useDiscoverMovie } from "../../../hooks/quires/useDiscoverMovie";
 import MovieCard from "../../blocks/MovieCard";
 
 function MovieList() {
-    const navigate = useNavigate();
-    const {data} = useDiscoverMovie();
-    const onClick = (movieID: number) => {
-        navigate(`/detail/${movieID}`);
-      };
+  const navigate = useNavigate();
+  const { data } = useDiscoverMovie();
+  const onClick = (movieID: number) => {
+    navigate(`/detail/${movieID}`);
+  };
 
-    return ( <div>
-     {data?.results?.map((movie) => (
+  return (
+    <div>
+      {data?.results?.map((movie) => (
         <Suspense fallback={<></>} key={movie.id}>
-          <MovieCard data={movie} onClick={onClick}/>
+          <MovieCard data={movie} onClick={onClick} />
         </Suspense>
       ))}
-    </div> );
+    </div>
+  );
 }
 
 export default MovieList;

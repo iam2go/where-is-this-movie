@@ -1,44 +1,86 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import styled from "styled-components";
+import { useDiscoverMovie } from "../../../hooks/quires/useDiscoverMovie";
 import { useGenreList } from "../../../hooks/quires/useGenreList";
 import { Button } from "../../atoms/button";
 import Option from "../../atoms/option";
 
-function GenresOption(){
+const FLATFORMS = [
+  {
+    id: 8,
+    name: "netflex",
+  },
+  {
+    id: 337,
+    name: "disney plus",
+  },
+  {
+    id: 356,
+    name: "wavve",
+  },
+  {
+    id: 4,
+    name: "watcha",
+  },
+];
+
+function GenresOption() {
   const { data: genres } = useGenreList();
   return (
     <OptionBox>
-        <h2>장르</h2>
-        <Suspense fallback={<>Loading...</>}>
-          {genres?.map((genre) => (
-            <Option key={genre.id}>{genre.name}</Option>
-          ))}
-        </Suspense>
-      </OptionBox>
-  )
+      <h2>장르</h2>
+      <Suspense fallback={<>Loading...</>}>
+        {genres?.map((genre) => (
+          <Option key={genre.id} id={genre.id}>
+            {genre.name}
+          </Option>
+        ))}
+      </Suspense>
+    </OptionBox>
+  );
 }
 
 function SearchOption() {
+  const [flatforms, setFlatforms] = useState<number[]>([]);
+  const { data: genres } = useGenreList();
+  const { refetch } = useDiscoverMovie({
+    with_watch_providers: flatforms,
+    page: 1,
+  });
+
+  const onClickFlatforms = (targetID: number, active: boolean) => {
+    if (active) {
+      setFlatforms((prev) => [...prev, targetID]);
+      return;
+    }
+    setFlatforms((prev) => prev.filter((id) => id !== targetID));
+  };
+
+  const onClickDiscover = () => {
+    refetch();
+  };
+
   return (
     <Wrap>
       <OptionBox>
         <h2>플랫폼🔮</h2>
-        <Option>netflex</Option>
-        <Option>watcha</Option>
-        <Option>wavve</Option>
-        <Option>disney plus</Option>
+        {FLATFORMS.map(({ id, name }) => (
+          <Option key={id} id={id} onClick={onClickFlatforms}>
+            {name}
+          </Option>
+        ))}
       </OptionBox>
-      {GenresOption()} 
+      {GenresOption()}
       <OptionBox>
         <h2>국가</h2>
-        <Option>한국</Option>
-        <Option>미국</Option>
-        <Option>프랑스</Option>
-        <Option>일본</Option>
+        <Option id={1}>한국</Option>
+        <Option id={2}>미국</Option>
+        <Option id={3}>프랑스</Option>
+        <Option id={4}>일본</Option>
       </OptionBox>
 
       <ButtonWrap>
-        <Button onClick={() => {}}>영화 찾기 🔍</Button>
+        <Button onClick={onClickDiscover}>영화 찾기 🔍</Button>
       </ButtonWrap>
     </Wrap>
   );
