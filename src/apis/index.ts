@@ -37,6 +37,15 @@ export type MovieInfo = {
   title: string;
 };
 
+export type DiscoverOptions = {
+  region?: string;
+  sort_by?: string;
+  page: number;
+  with_genres?: string[];
+  with_keywords?: string[];
+  with_watch_providers?: string[];
+}
+
 const searchMovieList = async (params: object) => {
   const response = await axios.get<Response<MovieData[]>>(
     `${TMDB_API}/search/movie`,
@@ -84,10 +93,21 @@ const getGenreList = async () => {
   return response.data.genres;
 };
 
+const discoverMovieList = async(params: DiscoverOptions) => {
+  const response  = await axios.get<Response<MovieData[]>>(
+    `${TMDB_API}/discover/movie`,
+    {
+      params: { api_key, language: "ko-KR", ...params },
+    }
+  );
+  return response.data;
+}
+
 export {
   searchMovieList,
   getMovieDetail,
   getMovieProviders,
   getRecommendMovies,
   getGenreList,
+  discoverMovieList
 };

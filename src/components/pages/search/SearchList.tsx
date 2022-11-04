@@ -3,7 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useInfiniteSearch } from "../../../hooks/quires/useSearchMovie";
-import SearchItem from "./SearchItem";
+import MovieCard from "../../blocks/MovieCard";
 
 type Props = {
   keyword: string;
@@ -27,7 +27,7 @@ function SearchList({ keyword }: Props) {
     <>
       {data?.pages[0].results?.map((movie) => (
         <Suspense fallback={<></>} key={movie.id}>
-          <SearchItem data={movie} onClick={onClick} keyword={keyword} />
+          <MovieCard data={movie} onClick={onClick} keyword={keyword} />
         </Suspense>
       ))}
       {data && data.pages[0].total_pages > 1 && !hasNextPage && (

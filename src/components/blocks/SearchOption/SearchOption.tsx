@@ -4,8 +4,21 @@ import { useGenreList } from "../../../hooks/quires/useGenreList";
 import { Button } from "../../atoms/button";
 import Option from "../../atoms/option";
 
-function SearchOption() {
+function GenresOption(){
   const { data: genres } = useGenreList();
+  return (
+    <OptionBox>
+        <h2>장르</h2>
+        <Suspense fallback={<>Loading...</>}>
+          {genres?.map((genre) => (
+            <Option key={genre.id}>{genre.name}</Option>
+          ))}
+        </Suspense>
+      </OptionBox>
+  )
+}
+
+function SearchOption() {
   return (
     <Wrap>
       <OptionBox>
@@ -15,14 +28,7 @@ function SearchOption() {
         <Option>wavve</Option>
         <Option>disney plus</Option>
       </OptionBox>
-      <OptionBox>
-        <h2>장르</h2>
-        <Suspense fallback={<>Loading...</>}>
-          {genres?.map((genre) => (
-            <Option key={genre.id}>{genre.name}</Option>
-          ))}
-        </Suspense>
-      </OptionBox>
+      {GenresOption()} 
       <OptionBox>
         <h2>국가</h2>
         <Option>한국</Option>
@@ -46,6 +52,8 @@ const Wrap = styled.div`
   width: 32rem;
   padding: 5rem 2rem;
   border-radius: 2rem;
+  height: fit-content;
+  margin-right: 3rem;
 `;
 
 const OptionBox = styled.div`

@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import styled from "styled-components";
 import Header from "../../blocks/Header";
 import SearchOption from "../../blocks/SearchOption";
+import MovieList from "./MovieList";
 
 function Discover() {
   return (
@@ -8,6 +10,9 @@ function Discover() {
       <Header />
       <ContentWrap>
         <SearchOption />
+        <Suspense fallback={<></>}>
+          <MovieList/>
+        </Suspense>
       </ContentWrap>
     </>
   );
@@ -16,10 +21,12 @@ function Discover() {
 const ContentWrap = styled.div`
   width: 100%;
   height: fit-content;
-  max-width: 120rem;
+  max-width: 100rem;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  margin-top: 5rem;
 `;
 
 export default Discover;
