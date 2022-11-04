@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const TMDB_API = process.env.REACT_APP_TMDB_API;
-const api_key = process.env.REACT_APP_TMDB_KEY;
+const TMDB_API = process.env.REACT_APP_TMDB_API || "";
+const api_key = process.env.REACT_APP_TMDB_KEY || "";
 
 export type MovieData = {
   id: number;

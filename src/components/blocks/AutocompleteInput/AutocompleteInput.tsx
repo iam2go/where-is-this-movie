@@ -1,9 +1,10 @@
 import { Suspense, useRef, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import styled from "styled-components";
 import Input from "../../atoms/input";
 import Icon from "../../atoms/icons";
 import useDebounce from "../../../hooks/useDebounce";
-import ResultBox, { ResultBoxLoader } from "./ResultBox";
+import ResultBox, { ResultBoxErrorBox, ResultBoxLoader } from "./ResultBox";
 import useOutsideClick from "../../../hooks/useOutsideClick";
 
 type Props = {
@@ -60,6 +61,7 @@ function AutocompleteInput({
           {value ? <Icon type="delete" solid /> : <Icon type="search" solid />}
         </IconWrap>
       </InputWrap>
+      <ErrorBoundary FallbackComponent={ResultBoxErrorBox}>
       <Suspense fallback={<ResultBoxLoader />}>
         {value && !hideResult && (
           <ResultBox
@@ -69,6 +71,7 @@ function AutocompleteInput({
           />
         )}
       </Suspense>
+      </ErrorBoundary>
     </AutocompleteBox>
   );
 }

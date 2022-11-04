@@ -40,7 +40,7 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
     return () => {
       window.removeEventListener("keyup", listener);
     };
-  }, [data, onClick, selected]);
+  }, [data, handleClickMore, onClick, selected]);
 
   return (
     <ResultBoxWrap>
@@ -77,6 +77,19 @@ export function ResultBoxLoader() {
   return (
     <ResultBoxWrap>
       <p>Loading...</p>
+    </ResultBoxWrap>
+  );
+}
+
+
+export function ResultBoxErrorBox({resetErrorBoundary} : {resetErrorBoundary: () => void}) {
+  setTimeout(() => {
+    resetErrorBoundary();
+  }, 1000);
+
+  return (
+    <ResultBoxWrap>
+      <p>문제가 발생했습니다. <br/>잠시 후 다시 시도해주세요.</p>
     </ResultBoxWrap>
   );
 }
