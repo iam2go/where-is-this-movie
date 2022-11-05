@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import styled from "styled-components";
 import Header from "../../blocks/Header";
 import SearchOption from "../../blocks/SearchOption";
+import TopButton from "../../blocks/TopButton";
 import MovieList from "./MovieList";
 
 function Discover() {
@@ -11,9 +12,10 @@ function Discover() {
       <ContentWrap>
         <SearchOption />
         <Suspense fallback={<></>}>
-          <MovieList/>
+          <MovieList />
         </Suspense>
       </ContentWrap>
+      <TopButton />
     </>
   );
 }

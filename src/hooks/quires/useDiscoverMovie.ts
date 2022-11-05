@@ -1,13 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
-import { discoverMovieList, DiscoverOptions } from "../../apis";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { discoverMovieList, MovieData, DiscoverOptions } from "../../apis";
 
 export function useDiscoverMovie(params?: DiscoverOptions) {
-  return useQuery(
+  return useInfiniteQuery(
     ["movie-discover"],
-    () => discoverMovieList({ ...params, page: 1 }),
+    ({ pageParam = 1 }) => discoverMovieList({ ...params, page: pageParam }),
     {
-      enabled: true,
-      retry: false,
+      enabled: false,
+      select: ({ pages, pageParams }) => {
+        const current = pages[pages.length - 1];
+        const results = pages.reduce((results: MovieData[] | [], data) => {
+          return [...results, ...data.results];
+        }, []);
+
+        return {
+          pageParams,
+          pages: [{ ...current, results }],
+        };
+      },
+      getNextPageParam: ({ total_pages, page }) =>
+        total_pages > page && page + 1,
     }
   );
 }

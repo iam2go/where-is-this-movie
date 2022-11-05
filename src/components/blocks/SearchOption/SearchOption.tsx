@@ -19,7 +19,7 @@ const FLATFORMS = [
     name: "wavve",
   },
   {
-    id: 4,
+    id: 97,
     name: "watcha",
   },
 ];
@@ -42,9 +42,10 @@ function GenresOption() {
 
 function SearchOption() {
   const [flatforms, setFlatforms] = useState<number[]>([]);
-  const { data: genres } = useGenreList();
   const { refetch } = useDiscoverMovie({
-    with_watch_providers: flatforms,
+    with_watch_providers: flatforms
+      .map((id: number) => id.toString())
+      .join(","),
     page: 1,
   });
 
@@ -96,6 +97,8 @@ const Wrap = styled.div`
   border-radius: 2rem;
   height: fit-content;
   margin-right: 3rem;
+  position: sticky;
+  top: 3rem;
 `;
 
 const OptionBox = styled.div`
