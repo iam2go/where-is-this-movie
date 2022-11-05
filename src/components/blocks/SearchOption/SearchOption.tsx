@@ -24,14 +24,14 @@ const FLATFORMS = [
   },
 ];
 
-function GenresOption() {
+function GenresOption(onClick: (id: number, active: boolean) => void) {
   const { data: genres } = useGenreList();
   return (
     <OptionBox>
       <h2>장르</h2>
       <Suspense fallback={<>Loading...</>}>
         {genres?.map((genre) => (
-          <Option key={genre.id} id={genre.id}>
+          <Option key={genre.id} id={genre.id} onClick={onClick}>
             {genre.name}
           </Option>
         ))}
@@ -42,10 +42,10 @@ function GenresOption() {
 
 function SearchOption() {
   const [flatforms, setFlatforms] = useState<number[]>([]);
+  const [genre, setGenre] = useState<number[]>([]);
   const { refetch } = useDiscoverMovie({
-    with_watch_providers: flatforms
-      .map((id: number) => id.toString())
-      .join(","),
+    with_watch_providers: flatforms,
+    with_genres: genre,
     page: 1,
   });
 
@@ -55,6 +55,14 @@ function SearchOption() {
       return;
     }
     setFlatforms((prev) => prev.filter((id) => id !== targetID));
+  };
+
+  const onClickGenre = (targetID: number, active: boolean) => {
+    if (active) {
+      setGenre((prev) => [...prev, targetID]);
+      return;
+    }
+    setGenre((prev) => prev.filter((id) => id !== targetID));
   };
 
   const onClickDiscover = () => {
@@ -71,7 +79,7 @@ function SearchOption() {
           </Option>
         ))}
       </OptionBox>
-      {GenresOption()}
+      {GenresOption(onClickGenre)}
       <OptionBox>
         <h2>국가</h2>
         <Option id={1}>한국</Option>

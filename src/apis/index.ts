@@ -41,9 +41,9 @@ export type DiscoverOptions = {
   region?: string;
   sort_by?: string;
   page: number;
-  with_genres?: string[];
-  with_keywords?: string[];
-  with_watch_providers?: string;
+  with_genres?: number[];
+  with_keywords?: number[];
+  with_watch_providers?: number[];
 };
 
 const searchMovieList = async (params: object) => {
@@ -94,10 +94,30 @@ const getGenreList = async () => {
 };
 
 const discoverMovieList = async (params: DiscoverOptions) => {
+  const options = [
+    "with_genres",
+    "with_keywords",
+    "with_watch_providers",
+  ] as const;
+
+  let newParams = {} as { [key in keyof DiscoverOptions]?: string };
+  options.forEach((option) => {
+    let value = params[option];
+    if (Array.isArray(value) && value!.length > 0) {
+      newParams[option] = value.map((id: number) => id.toString()).join(",");
+    }
+  });
+
   const response = await axios.get<Response<MovieData[]>>(
     `${TMDB_API}/discover/movie`,
     {
-      params: { api_key, language: "ko-KR", ...params, watch_region: "KR" },
+      params: {
+        api_key,
+        language: "ko-KR",
+        ...params,
+        ...newParams,
+        watch_region: "KR",
+      },
     }
   );
   return response.data;
