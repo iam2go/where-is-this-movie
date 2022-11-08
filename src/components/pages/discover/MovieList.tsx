@@ -1,9 +1,10 @@
-import { Suspense, useCallback } from "react";
+import { Suspense, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDiscoverMovie } from "../../../hooks/quires/useDiscoverMovie";
 import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
 import MovieCard from "../../blocks/MovieCard";
+import MovieCardLoader from "../../blocks/MovieCard/MovieCardLoader";
 
 const options = { threshold: 1.0};
 function MovieList() {
@@ -21,11 +22,12 @@ function MovieList() {
   },[fetchNextPage, hasNextPage]);
 
   const target  = useIntersectionObserver(onIntersect, options);
+  const movieList = useMemo(() => data ? data.pages.flatMap(({results}) => results) : [], [data]);
 
   return (
     <div>
-      {data?.pages[0]?.results?.map((movie) => (
-        <Suspense fallback={<></>} key={movie.id}>
+      {movieList.map((movie) => (
+        <Suspense fallback={<MovieCardLoader/>} key={movie.id}>
           <MovieCard data={movie} onClick={onClick} />
         </Suspense>
       ))}

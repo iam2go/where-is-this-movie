@@ -4,6 +4,7 @@ import Header from "../../blocks/Header";
 import SearchOption from "../../blocks/SearchOption";
 import TopButton from "../../blocks/TopButton";
 import MovieList from "./MovieList";
+import MovieLoader from "./MovieLoader";
 
 function Discover() {
   return (

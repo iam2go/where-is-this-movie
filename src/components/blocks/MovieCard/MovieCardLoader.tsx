@@ -10,7 +10,7 @@ function MovieCardLoader() {
             <Skeleton width={8} height={3.6} />
             <Skeleton width={8} height={3.6} />
           </S.ProviderBoxLoader>
-          <Skeleton width={65} height={1.8} />
+          <Skeleton fullWidth height={1.8} />
           <Skeleton width={25} height={1.8} />
         </S.InfoBox>
       </S.LoaderWrap> );
