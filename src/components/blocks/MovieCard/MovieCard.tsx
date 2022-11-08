@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import styled from "styled-components";
 import { MovieData } from "../../../apis";
 import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
 import Poster from "../../atoms/poster";

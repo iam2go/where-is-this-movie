@@ -1,23 +1,26 @@
-import { Suspense, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { Suspense, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { useDiscoverMovie } from "../../../hooks/quires/useDiscoverMovie";
+import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
 import MovieCard from "../../blocks/MovieCard";
 
+const options = { threshold: 1.0};
 function MovieList() {
   const navigate = useNavigate();
-  const { data, fetchNextPage, hasNextPage } = useDiscoverMovie();
-  const { ref, inView } = useInView();
+  const { data, fetchNextPage, hasNextPage, isLoading } = useDiscoverMovie();
 
   const onClick = (movieID: number) => {
     navigate(`/detail/${movieID}`);
   };
 
-  useEffect(() => {
-    if (inView && hasNextPage) {
+  const onIntersect = useCallback(([entry] : IntersectionObserverEntry[]) => {
+    if(entry.isIntersecting && hasNextPage){
       fetchNextPage();
     }
-  }, [fetchNextPage, hasNextPage, inView]);
+  },[fetchNextPage, hasNextPage]);
+
+  const target  = useIntersectionObserver(onIntersect, options);
 
   return (
     <div>
@@ -26,9 +29,13 @@ function MovieList() {
           <MovieCard data={movie} onClick={onClick} />
         </Suspense>
       ))}
-      <div ref={ref} />
+      {!isLoading && <Observer ref={target} />}
     </div>
   );
 }
+
+const Observer = styled.div`
+  height: 2rem;
+`
 
 export default MovieList;
