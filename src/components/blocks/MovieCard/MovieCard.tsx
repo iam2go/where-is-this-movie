@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { MovieData } from "@apis";
+import { MovieData } from "@apis/index";
 import { useMovieDetail } from "@hooks/quires/useMovieDetail";
 import Poster from "@atoms/poster";
 import { HighlightWord } from "@atoms/text";
