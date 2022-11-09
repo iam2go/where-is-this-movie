@@ -2,9 +2,9 @@ import styled from "styled-components";
 import {
   ProviderType,
   useMovieProvider,
-} from "../../../hooks/quires/useMovieProvider";
-import PlatformBlock from "../../blocks/PlatformBlock";
-import { TabPanel } from "../../blocks/Tab";
+} from "@hooks/quires/useMovieProvider";
+import PlatformBlock from "@blocks/PlatformBlock";
+import { TabPanel } from "@blocks/Tab";
 
 type Props = {
   id: string;

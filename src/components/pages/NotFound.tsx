@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../atoms/button";
+import { Button } from "@atoms/button";
 
 function NotFound() {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function NotFound() {
   return (
     <Wrap>
       <img
-        src={require("../../assets/404Image.png")}
+        src={require("@assets/404Image.png")}
         alt="page not found"
         width={"200px"}
       />

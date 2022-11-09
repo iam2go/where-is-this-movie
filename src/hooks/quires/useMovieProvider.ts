@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMovieProviders } from "../../apis";
+import { getMovieProviders } from "@apis/index";
 
 type Provider = {
   logo_path: string;

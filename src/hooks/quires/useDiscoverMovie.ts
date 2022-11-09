@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { discoverMovieList, DiscoverOptions } from "../../apis";
+import { discoverMovieList, DiscoverOptions } from "@apis/index";
 
 export function useDiscoverMovie(params?: DiscoverOptions) {
   return useInfiniteQuery(

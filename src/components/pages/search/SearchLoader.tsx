@@ -1,5 +1,5 @@
 
-import MovieCardLoader from "../../blocks/MovieCard/MovieCardLoader";
+import MovieCardLoader from "@blocks/MovieCard/MovieCardLoader";
 
 function SearchLoader() {
   return (

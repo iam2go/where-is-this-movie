@@ -1,9 +1,9 @@
 import { Suspense, useState } from "react";
 import styled from "styled-components";
-import { useDiscoverMovie } from "../../../hooks/quires/useDiscoverMovie";
-import { useGenreList } from "../../../hooks/quires/useGenreList";
-import { Button } from "../../atoms/button";
-import Option from "../../atoms/option";
+import { useDiscoverMovie } from "@hooks/quires/useDiscoverMovie";
+import { useGenreList } from "@hooks/quires/useGenreList";
+import { Button } from "@atoms/button";
+import Option from "@atoms/option";
 
 const FLATFORMS = [
   {

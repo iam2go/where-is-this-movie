@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useProgressiveImg from "../../../hooks/useProgressiveImg";
+import useProgressiveImg from "@hooks/useProgressiveImg";
 import Icons from "../icons";
 
 type Props = {

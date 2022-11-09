@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import {  searchMovieList } from "../../apis";
+import {  searchMovieList } from "@apis/index";
 
 export function useSearchMovie(keyword: string, all = false) {
   return useQuery(

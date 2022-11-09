@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PlatformLogo } from "../../atoms/logo";
+import { PlatformLogo } from "@atoms/logo";
 
 type Props = {
   url: string;

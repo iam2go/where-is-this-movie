@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { SmallLogo } from "../../atoms/logo";
+import { SmallLogo } from "@atoms/logo";
 import AutocompleteInput from "../AutocompleteInput";
 
 function Header() {

@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useRecommendMovies } from "../../../hooks/quires/useRecommendMovies";
-import Icons from "../../atoms/icons";
-import Poster from "../../atoms/poster";
+import { useRecommendMovies } from "@hooks/quires/useRecommendMovies";
+import Icons from "@atoms/icons";
+import Poster from "@atoms/poster";
 
 type Props = {
   id: string;

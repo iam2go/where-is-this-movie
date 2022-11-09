@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { useSearchMovie } from "../../../hooks/quires/useSearchMovie";
-import { HighlightWord } from "../../atoms/text";
+import { useSearchMovie } from "@hooks/quires/useSearchMovie";
+import { HighlightWord } from "@atoms/text";
 
 type Props = {
   keyword: string;

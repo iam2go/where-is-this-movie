@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import styled from "styled-components";
-import { MovieData } from "../../../apis";
-import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
-import Poster from "../../atoms/poster";
-import { HighlightWord } from "../../atoms/text";
+import { MovieData } from "@apis/index";
+import { useMovieDetail } from "@hooks/quires/useMovieDetail";
+import Poster from "@atoms/poster";
+import { HighlightWord } from "@atoms/text";
 import ProviderList from "./ProviderList";
 
 type Props = {

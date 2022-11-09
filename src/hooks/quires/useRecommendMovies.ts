@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getRecommendMovies } from "../../apis";
+import { getRecommendMovies } from "@apis/index";
 
 export function useRecommendMovies(movieID: string, index: number) {
   return useQuery(

@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import useProgressiveImg from "../../../hooks/useProgressiveImg";
-import { colorQuantization, RGBColor, transToRGBA } from "../../../utils/color";
+import useProgressiveImg from "@hooks/useProgressiveImg";
+import { colorQuantization, RGBColor, transToRGBA } from "@utils/color";
 
 type Props = {
   url: string;

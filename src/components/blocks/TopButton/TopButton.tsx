@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Button } from "../../atoms/button";
-import Icons from "../../atoms/icons";
+import { Button } from "@atoms/button";
+import Icons from "@atoms/icons";
 
 function TopButton() {
   const [show, setShow] = useState(false);

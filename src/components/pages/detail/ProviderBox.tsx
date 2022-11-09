@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
-import Tabs, { Tab } from "../../blocks/Tab";
+import Tabs, { Tab } from "@blocks/Tab";
 
 const ProviderContent = React.lazy(() => import("./ProviderContent"));
 

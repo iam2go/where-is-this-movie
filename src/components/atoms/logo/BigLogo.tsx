@@ -5,7 +5,7 @@ function BigLogo() {
   return (
     <Logo>
       <img
-        src={require("../../../assets/WTM_logo.png")}
+        src={require("@assets/WTM_logo.png")}
         alt="logo"
         width={"350px"}
       />

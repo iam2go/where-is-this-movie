@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
-import Background from "../../atoms/background";
+import { useMovieDetail } from "@hooks/quires/useMovieDetail";
+import Background from "@atoms/background";
 
 type Params = {
   id: string;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Icons from "../../atoms/icons";
-import Skeleton from "../../atoms/skeleton";
+import Icons from "@atoms/icons";
+import Skeleton from "@atoms/skeleton";
 
 function DetailLoader() {
   return (

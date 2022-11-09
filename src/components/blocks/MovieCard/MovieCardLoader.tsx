@@ -1,4 +1,4 @@
-import Skeleton from "../../atoms/skeleton";
+import Skeleton from "@atoms/skeleton";
 import * as S from "./MovieCard.styled";
 
 function MovieCardLoader() {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useMovieProvider } from "../../../hooks/quires/useMovieProvider";
-import PlatformBlock from "../../blocks/PlatformBlock";
+import { useMovieProvider } from "@hooks/quires/useMovieProvider";
+import PlatformBlock from "@blocks/PlatformBlock";
 
 type Props = {
   id: number;

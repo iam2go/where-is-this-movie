@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
-import Icons from "../../atoms/icons";
-import Poster from "../../atoms/poster/Poster";
-import Quote from "../../atoms/quote";
-import Tag from "../../atoms/tag";
+import { useMovieDetail } from "@hooks/quires/useMovieDetail";
+import Icons from "@atoms/icons";
+import Poster from "@atoms/poster/Poster";
+import Quote from "@atoms/quote";
+import Tag from "@atoms/tag";
 
 type Props = {
   id: string;

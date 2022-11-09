@@ -1,9 +1,9 @@
 import { Suspense, useCallback,  useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useInfiniteSearch } from "../../../hooks/quires/useSearchMovie";
-import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
-import MovieCard from "../../blocks/MovieCard";
+import { useInfiniteSearch } from "@hooks/quires/useSearchMovie";
+import useIntersectionObserver from "@hooks/useIntersectionObserver";
+import MovieCard from "@blocks/MovieCard";
 
 type Props = {
   keyword: string;

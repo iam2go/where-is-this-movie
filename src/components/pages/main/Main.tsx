@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { BigLogo } from "../../atoms/logo";
-import AutocompleteInput from "../../blocks/AutocompleteInput";
+import { BigLogo } from "@atoms/logo";
+import AutocompleteInput from "@blocks/AutocompleteInput";
 
 function Main() {
   const navigate = useNavigate();

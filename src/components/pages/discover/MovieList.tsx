@@ -1,10 +1,10 @@
 import { Suspense, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useDiscoverMovie } from "../../../hooks/quires/useDiscoverMovie";
-import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
-import MovieCard from "../../blocks/MovieCard";
-import MovieCardLoader from "../../blocks/MovieCard/MovieCardLoader";
+import { useDiscoverMovie } from "@hooks/quires/useDiscoverMovie";
+import useIntersectionObserver from "@hooks/useIntersectionObserver";
+import MovieCard from "@blocks/MovieCard";
+import MovieCardLoader from "@blocks/MovieCard/MovieCardLoader";
 
 const options = { threshold: 1.0};
 function MovieList() {

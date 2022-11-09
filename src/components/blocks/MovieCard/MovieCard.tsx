@@ -1,9 +1,9 @@
 import { Suspense } from "react";
-import { MovieData } from "../../../apis";
-import { useMovieDetail } from "../../../hooks/quires/useMovieDetail";
-import Poster from "../../atoms/poster";
-import { HighlightWord } from "../../atoms/text";
-import ProviderList from "../../pages/search/ProviderList";
+import { MovieData } from "@apis";
+import { useMovieDetail } from "@hooks/quires/useMovieDetail";
+import Poster from "@atoms/poster";
+import { HighlightWord } from "@atoms/text";
+import ProviderList from "@pages/search/ProviderList";
 import * as S from "./MovieCard.styled";
 
 
