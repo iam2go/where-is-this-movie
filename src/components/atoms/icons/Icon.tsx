@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-type IconTypes = "search" | "delete" | "time" | "refresh" | "image" | "up";
+type IconTypes = "search" | "delete" | "time" | "refresh" | "image" | "up" | "expandMore" | "expandLess";
 type Props = {
   type: IconTypes;
   size?: number;
@@ -20,6 +20,8 @@ const iconClassName = {
   refresh: "fa-arrow-rotate-right",
   image: "fa-image",
   up: "fa-arrow-up",
+  expandMore: "fa-chevron-down",
+  expandLess: "fa-chevron-up"
 };
 
 function Icon({ type, color, size = 16, solid = false }: Props) {
