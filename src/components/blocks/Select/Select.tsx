@@ -55,11 +55,6 @@ function Select({width, options}: Props) {
                     </animated.div>
                 </S.ExpandButton>
             </TextField>
-            {/* {transitions(({...style}, expand) => expand &&
-            (<S.OptionBox style={style}>
-                 {options.map(({key, value}) => <S.Option key={key} onClick={() => onClickOption(value)}>{value}</S.Option>)}
-             </S.OptionBox>
-             ))} */}
              {expand && (
                 <S.OptionBox style={optionStyle}>
                 {options.map(({key, value}) => <S.Option key={key} onClick={() => onClickOption(value)}>{value}</S.Option>)}

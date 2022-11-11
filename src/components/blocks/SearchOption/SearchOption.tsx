@@ -100,7 +100,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 32rem;
+  width: 26rem;
   padding: 5rem 2rem;
   border-radius: 2rem;
   height: fit-content;

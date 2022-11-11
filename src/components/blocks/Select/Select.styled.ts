@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {animated, SpringProps} from "@react-spring/web";
+import {animated} from "@react-spring/web";
 
 type StyledProps = {
     width: string;
