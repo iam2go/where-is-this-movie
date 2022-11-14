@@ -102,7 +102,7 @@ const Wrap = styled.div`
   align-items: center;
   width: 26rem;
   padding: 5rem 2rem;
-  border-radius: 2rem;
+  border-radius: 0 2rem 2rem 2rem;
   height: fit-content;
   margin-right: 3rem;
   position: sticky;
