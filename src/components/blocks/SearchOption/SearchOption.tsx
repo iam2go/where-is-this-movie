@@ -24,6 +24,10 @@ const FLATFORMS = [
   },
 ];
 
+type Props = {
+  onClose: () => void;
+}
+
 function GenresOption(onClick: (id: number, active: boolean) => void) {
   const { data: genres } = useGenreList();
   return (
@@ -40,7 +44,7 @@ function GenresOption(onClick: (id: number, active: boolean) => void) {
   );
 }
 
-function SearchOption() {
+function SearchOption({onClose}: Props) {
   const [flatforms, setFlatforms] = useState<number[]>([]);
   const [genre, setGenre] = useState<number[]>([]);
   const { refetch } = useDiscoverMovie({
@@ -67,6 +71,7 @@ function SearchOption() {
 
   const onClickDiscover = () => {
     refetch();
+    onClose();
   };
 
   return (
