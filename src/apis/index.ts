@@ -38,7 +38,7 @@ export type MovieInfo = {
 };
 
 export type DiscoverOptions = {
-  region?: string;
+  with_original_language?: string[];
   sort_by?: string;
   page: number;
   with_genres?: number[];
@@ -107,6 +107,10 @@ const discoverMovieList = async (params: DiscoverOptions) => {
       newParams[option] = value.map((id: number) => id.toString()).join(",");
     }
   });
+
+  if(params.with_original_language){
+    newParams.with_original_language = params.with_original_language.join("|");
+  }
 
   const response = await axios.get<Response<MovieData[]>>(
     `${TMDB_API}/discover/movie`,

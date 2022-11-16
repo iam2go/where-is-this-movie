@@ -18,17 +18,17 @@ value: '오름차순'
 function Discover() {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <ContentWrap>
         <Filter/>
-        <div>
-        {/* <SelectWrap>
-          <Select width="13rem" options={SORT_OPTIONS}/>
-        </SelectWrap> */}
-        {/* <Suspense fallback={<></>}>
-          <MovieList />
-        </Suspense> */}
-        </div>
+        <ResultWrap>
+          <SelectWrap>
+            <Select width="13rem" options={SORT_OPTIONS}/>
+          </SelectWrap>
+          <Suspense fallback={<></>}>
+            <MovieList />
+          </Suspense>
+        </ResultWrap>
       </ContentWrap>
       <TopButton />
     </>
@@ -46,9 +46,14 @@ const ContentWrap = styled.div`
   margin-top: 5rem;
 `;
 
+const ResultWrap = styled.div`
+  width: 85rem;
+`;
+
 const SelectWrap = styled.div`
   float: right;
   height: fit-content;
+  margin-bottom: 2rem;
 `
 
 export default Discover;

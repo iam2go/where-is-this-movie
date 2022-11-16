@@ -4,8 +4,8 @@ import cn from "classnames";
 
 type Props = {
   children: React.ReactNode;
-  onClick?: (id: number, active: boolean) => void;
-  id: number;
+  onClick?: (id: number | string, active: boolean) => void;
+  id: number | string;
 };
 function Option({ children, onClick, id }: Props) {
   const [active, setActive] = useState(false);

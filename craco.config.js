@@ -8,6 +8,7 @@ module.exports = {
       "@atoms": path.resolve(__dirname, 'src/components/atoms'),
       "@blocks": path.resolve(__dirname, 'src/components/blocks'),
       "@pages": path.resolve(__dirname, 'src/components/pages'),
+      "@constants": path.resolve(__dirname, 'src/constants'),
       "@hooks": path.resolve(__dirname, 'src/hooks'),
       "@styles": path.resolve(__dirname, 'src/styles'),
       "@utils": path.resolve(__dirname, 'src/utils')

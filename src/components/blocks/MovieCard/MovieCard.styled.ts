@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-background-color: white;
-width: 100%;
-max-width: 80rem;
-border-radius: 1.5rem;
-padding: 2rem 4rem;
-margin: auto;
-margin-bottom: 3rem;
-box-shadow: 0 3px 0 #e3e2e2;
-display: flex;
-cursor: pointer;
+  background-color: white;
+  width: 100%;
+  max-width: 80rem;
+  border-radius: 1.5rem;
+  padding: 2rem 4rem;
+  margin: auto;
+  margin-bottom: 3rem;
+  box-shadow: 0 3px 0 #e3e2e2;
+  display: flex;
+  cursor: pointer;
 `;
 
 const LoaderWrap = styled(Wrap)`
-cursor: default;
+  cursor: default;
 `
 
 const InfoBox = styled.div`

@@ -4,31 +4,13 @@ import { useDiscoverMovie } from "@hooks/quires/useDiscoverMovie";
 import { useGenreList } from "@hooks/quires/useGenreList";
 import { Button } from "@atoms/button";
 import Option from "@atoms/option";
-
-const FLATFORMS = [
-  {
-    id: 8,
-    name: "netflex",
-  },
-  {
-    id: 337,
-    name: "disney plus",
-  },
-  {
-    id: 356,
-    name: "wavve",
-  },
-  {
-    id: 97,
-    name: "watcha",
-  },
-];
+import { FLATFORMS, REGION } from "@constants/options";
 
 type Props = {
   onClose: () => void;
 }
 
-function GenresOption(onClick: (id: number, active: boolean) => void) {
+function GenresOption(onClick: (id: number | string, active: boolean) => void) {
   const { data: genres } = useGenreList();
   return (
     <OptionBox>
@@ -47,26 +29,41 @@ function GenresOption(onClick: (id: number, active: boolean) => void) {
 function SearchOption({onClose}: Props) {
   const [flatforms, setFlatforms] = useState<number[]>([]);
   const [genre, setGenre] = useState<number[]>([]);
+  const [region, setRegion] = useState<string[]>([]);
+
+
   const { refetch } = useDiscoverMovie({
     with_watch_providers: flatforms,
     with_genres: genre,
+    with_original_language: region,
     page: 1,
   });
 
-  const onClickFlatforms = (targetID: number, active: boolean) => {
+  const onClickFlatforms = (targetID: number | string, active: boolean) => {
     if (active) {
-      setFlatforms((prev) => [...prev, targetID]);
+      const id = typeof targetID === 'string' ? parseInt(targetID) : targetID;
+      setFlatforms((prev) => [...prev, id]);
       return;
     }
     setFlatforms((prev) => prev.filter((id) => id !== targetID));
   };
 
-  const onClickGenre = (targetID: number, active: boolean) => {
+  const onClickGenre = (targetID: number | string, active: boolean) => {
     if (active) {
-      setGenre((prev) => [...prev, targetID]);
+      const id = typeof targetID === 'string' ? parseInt(targetID) : targetID;
+      setGenre((prev) => [...prev, id]);
       return;
     }
     setGenre((prev) => prev.filter((id) => id !== targetID));
+  };
+
+  const onClickRegion = (target: string | number, active: boolean) => {
+    if(typeof target === 'number') return;
+    if (active) {
+      setRegion((prev) => [...prev, target]);
+      return;
+    }
+    setRegion((prev) => prev.filter((code) => code !== target));
   };
 
   const onClickDiscover = () => {
@@ -76,43 +73,51 @@ function SearchOption({onClose}: Props) {
 
   return (
     <Wrap>
-      <OptionBox>
-        <h2>플랫폼🔮</h2>
-        {FLATFORMS.map(({ id, name }) => (
-          <Option key={id} id={id} onClick={onClickFlatforms}>
-            {name}
-          </Option>
-        ))}
-      </OptionBox>
-      {GenresOption(onClickGenre)}
-      <OptionBox>
-        <h2>국가</h2>
-        <Option id={1}>한국</Option>
-        <Option id={2}>미국</Option>
-        <Option id={3}>프랑스</Option>
-        <Option id={4}>일본</Option>
-      </OptionBox>
+      <InnerWrap>
+        <OptionBox>
+          <h2>플랫폼🔮</h2>
+          {FLATFORMS.map(({ id, name }) => (
+            <Option key={id} id={id} onClick={onClickFlatforms}>
+              {name}
+            </Option>
+          ))}
+        </OptionBox>
+        {GenresOption(onClickGenre)}
+        <OptionBox>
+          <h2>국가</h2>
+          {REGION.map(({name, subCode}) => (
+            <Option key={subCode} id={subCode} onClick={onClickRegion}>{name}</Option>
+          ))}
+        </OptionBox>
 
-      <ButtonWrap>
-        <Button onClick={onClickDiscover}>영화 찾기 🔍</Button>
-      </ButtonWrap>
+        <ButtonWrap>
+          <Button onClick={onClickDiscover}>영화 찾기 🔍</Button>
+        </ButtonWrap>
+      </InnerWrap>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
+  width: 26rem;
+  height: 50rem;
   background-color: ${({ theme }) => theme.color.background2};
+  border-radius: 0 2rem 2rem 2rem;
+  position: sticky;
+  top: 3rem;
+  padding: 5rem 0;
+`;
+
+const InnerWrap = styled.div`
+  width: 90%;
+  height: 50rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 26rem;
-  padding: 5rem 2rem;
-  border-radius: 0 2rem 2rem 2rem;
-  height: fit-content;
+  padding: 0 2rem;
+  overflow-y: scroll;
   margin-right: 3rem;
-  position: sticky;
-  top: 3rem;
-`;
+`
 
 const OptionBox = styled.div`
   margin: 2rem 0;
