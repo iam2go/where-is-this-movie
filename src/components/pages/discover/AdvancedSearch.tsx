@@ -18,7 +18,7 @@ value: '오름차순'
 function Discover() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <ContentWrap>
         <Filter/>
         <ResultWrap>

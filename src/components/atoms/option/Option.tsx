@@ -1,19 +1,22 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 import cn from "classnames";
+import { Filter } from "@blocks/Dialog/DiscoverDialog";
 
 type Props = {
   children: React.ReactNode;
-  onClick?: (id: number | string, active: boolean) => void;
+  onClick?: (type: keyof Filter, id: number | string, active: boolean) => void;
   id: number | string;
+  type: keyof Filter;
 };
-function Option({ children, onClick, id }: Props) {
+function Option({ children, onClick, id, type}: Props) {
   const [active, setActive] = useState(false);
 
   const handleClick = useCallback(() => {
-    onClick?.(id, !active);
+    onClick?.(type, id, !active);
     setActive((prev) => !prev);
-  }, [active, id, onClick]);
+  }, [active, id, onClick, type]);
+
   return (
     <Block className={cn({ active })} onClick={handleClick}>
       {children}
@@ -24,21 +27,23 @@ function Option({ children, onClick, id }: Props) {
 const Block = styled.div`
   cursor: pointer;
   display: inline-block;
-  background-color: white;
-  padding: 0.5rem 1rem;
+  background-color: ${({theme}) => theme.color.background};
+  padding: 0.8rem 1.4rem;
   margin: 0.5rem 0;
   margin-right: 0.5rem;
   border-radius: 2rem;
+  font-size: 12px;
   border: 2px solid white;
   &:hover {
-    background-color: ${({ theme }) => theme.color.background};
+    background-color: ${({ theme }) => theme.color.background2};
   }
 
   &.active {
     border-color: ${({ theme }) => theme.color.point};
     border-width: 2px;
     border-style: solid;
-    color: ${({ theme }) => theme.color.point};
+    background-color: ${({ theme }) => theme.color.point};
+    color: white
     /* background-color: rgba(242, 71, 95, 0.2); */
   }
 `;

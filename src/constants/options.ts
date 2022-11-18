@@ -1,4 +1,4 @@
-export const FLATFORMS = [
+export const PLATFORMS = [
     {
       id: 8,
       name: "netflex",
