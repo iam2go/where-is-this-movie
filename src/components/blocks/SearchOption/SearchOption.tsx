@@ -5,19 +5,25 @@ import Option from "@atoms/option";
 import { PLATFORMS, REGION } from "@constants/options";
 import { Filter } from "@blocks/Dialog/DiscoverDialog";
 
-
 type Props = {
-  onClick: (type: keyof Filter, id: number | string, active: boolean) => void
+  onClick: (type: keyof Filter, id: number | string, active: boolean) => void;
+  data: Array<number | string>;
 };
 
-function GenresOption({onClick} : Props) {
+function GenresOption({ onClick, data }: Props) {
   const { data: genres } = useGenreList();
   return (
     <OptionBox>
       <h2>장르</h2>
       <Suspense fallback={<>Loading...</>}>
         {genres?.map((genre) => (
-          <Option key={genre.id} id={genre.id} onClick={onClick} type="genre">
+          <Option
+            key={genre.id}
+            id={genre.id}
+            onClick={onClick}
+            type="genre"
+            active={data.includes(genre.id)}
+          >
             {genre.name}
           </Option>
         ))}
@@ -26,30 +32,43 @@ function GenresOption({onClick} : Props) {
   );
 }
 
-function PlatformsOption({onClick}: Props){
+function PlatformsOption({ onClick, data }: Props) {
   return (
     <OptionBox>
-          <h2>플랫폼🔮</h2>
-          {PLATFORMS.map(({ id, name }) => (
-            <Option key={id} id={id} onClick={onClick} type="platforms">
-              {name}
-            </Option>
-          ))}
-        </OptionBox>
-  )
-}
-
-function RegionsOption({onClick}: Props){
-  return (
-    <OptionBox>
-          <h2>국가</h2>
-          {REGION.map(({name, subCode}) => (
-            <Option key={subCode} id={subCode} onClick={onClick} type="region">{name}</Option>
-          ))}
+      <h2>플랫폼🔮</h2>
+      {PLATFORMS.map(({ id, name }) => (
+        <Option
+          key={id}
+          id={id}
+          onClick={onClick}
+          type="platforms"
+          active={data.includes(id)}
+        >
+          {name}
+        </Option>
+      ))}
     </OptionBox>
-  )
+  );
 }
 
+function RegionsOption({ onClick, data }: Props) {
+  return (
+    <OptionBox>
+      <h2>국가</h2>
+      {REGION.map(({ name, subCode }) => (
+        <Option
+          key={subCode}
+          id={subCode}
+          onClick={onClick}
+          type="region"
+          active={data.includes(subCode)}
+        >
+          {name}
+        </Option>
+      ))}
+    </OptionBox>
+  );
+}
 
 const OptionBox = styled.div`
   margin: 2rem 2rem;
@@ -63,5 +82,4 @@ const OptionBox = styled.div`
   }
 `;
 
-
-export {PlatformsOption, GenresOption, RegionsOption};
+export { PlatformsOption, GenresOption, RegionsOption };

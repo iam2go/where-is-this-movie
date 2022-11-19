@@ -1,4 +1,3 @@
-import { Button } from "@atoms/button";
 import DiscoverButton from "@blocks/DiscoverButton";
 import {
   PlatformsOption,
@@ -6,8 +5,9 @@ import {
   RegionsOption,
 } from "@blocks/SearchOption/SearchOption";
 import { useDiscoverMovie } from "@hooks/quires/useDiscoverMovie";
-import { useMemo } from "react";
-import { useCallback, useState } from "react";
+import { useMemo, useCallback } from "react";
+import { useRecoilState } from "recoil";
+import { discoverOptionState } from "@recoil/discover";
 import styled from "styled-components";
 import Dialog from "./Dialog";
 
@@ -24,21 +24,11 @@ export type Filter = {
   region: string[];
 };
 
-const filter_init = {
-  platforms: [],
-  genre: [],
-  region: [],
-};
-
 function DiscoverDialog({ onClose }: Props) {
-  const [filter, setFilter] = useState<Filter>(filter_init);
+  //   const [filter, setFilter] = useState<Filter>(filter_init);
+  const [filter, setFilter] = useRecoilState(discoverOptionState);
 
-  const { refetch } = useDiscoverMovie({
-    with_watch_providers: filter.platforms,
-    with_genres: filter.genre,
-    with_original_language: filter.region,
-    page: 1,
-  });
+  const { refetch } = useDiscoverMovie();
 
   const onChange = useCallback(
     (type: keyof Filter, target: number | string, active: boolean) => {
@@ -53,7 +43,7 @@ function DiscoverDialog({ onClose }: Props) {
         ),
       }));
     },
-    []
+    [setFilter]
   );
 
   const onClickDiscover = useCallback(() => {
@@ -76,9 +66,9 @@ function DiscoverDialog({ onClose }: Props) {
       Buttons={<DiscoverButton onClick={onClickDiscover} count={optionCount} />}
     >
       <Wrap>
-        <PlatformsOption onClick={onChange} />
-        <GenresOption onClick={onChange} />
-        <RegionsOption onClick={onChange} />
+        <PlatformsOption onClick={onChange} data={filter.platforms} />
+        <GenresOption onClick={onChange} data={filter.genre} />
+        <RegionsOption onClick={onChange} data={filter.region} />
       </Wrap>
     </Dialog>
   );
@@ -89,11 +79,6 @@ const Wrap = styled.div`
   height: 50rem;
   display: flex;
   flex-direction: column;
-  /* padding: 0 2rem; */
-  /* overflow-y: scroll; */
-  /* margin-right: 3rem; */
 `;
-
-const Text = styled.div``;
 
 export default DiscoverDialog;

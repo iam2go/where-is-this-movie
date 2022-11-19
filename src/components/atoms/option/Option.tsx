@@ -8,13 +8,11 @@ type Props = {
   onClick?: (type: keyof Filter, id: number | string, active: boolean) => void;
   id: number | string;
   type: keyof Filter;
+  active: boolean;
 };
-function Option({ children, onClick, id, type}: Props) {
-  const [active, setActive] = useState(false);
-
+function Option({ children, onClick, id, type, active }: Props) {
   const handleClick = useCallback(() => {
     onClick?.(type, id, !active);
-    setActive((prev) => !prev);
   }, [active, id, onClick, type]);
 
   return (
@@ -27,7 +25,7 @@ function Option({ children, onClick, id, type}: Props) {
 const Block = styled.div`
   cursor: pointer;
   display: inline-block;
-  background-color: ${({theme}) => theme.color.background};
+  background-color: ${({ theme }) => theme.color.background};
   padding: 0.8rem 1.4rem;
   margin: 0.5rem 0;
   margin-right: 0.5rem;
@@ -43,8 +41,7 @@ const Block = styled.div`
     border-width: 2px;
     border-style: solid;
     background-color: ${({ theme }) => theme.color.point};
-    color: white
-    /* background-color: rgba(242, 71, 95, 0.2); */
+    color: white;
   }
 `;
 

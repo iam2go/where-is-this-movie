@@ -1,3 +1,4 @@
+import { Filter } from "@recoil/discover";
 import axios from "axios";
 
 const TMDB_API = process.env.REACT_APP_TMDB_API || "";
@@ -44,6 +45,7 @@ export type DiscoverOptions = {
   with_genres?: number[];
   with_keywords?: number[];
   with_watch_providers?: number[];
+  watch_region?: string;
 };
 
 const searchMovieList = async (params: object) => {
@@ -93,23 +95,24 @@ const getGenreList = async () => {
   return response.data.genres;
 };
 
-const discoverMovieList = async (params: DiscoverOptions) => {
-  const options = [
-    "with_genres",
-    "with_keywords",
-    "with_watch_providers",
-  ] as const;
-
+const discoverMovieList = async (params: Filter & { page: number }) => {
   let newParams = {} as { [key in keyof DiscoverOptions]?: string };
-  options.forEach((option) => {
-    let value = params[option];
-    if (Array.isArray(value) && value!.length > 0) {
-      newParams[option] = value.map((id: number) => id.toString()).join(",");
-    }
-  });
 
-  if(params.with_original_language){
-    newParams.with_original_language = params.with_original_language.join("|");
+  if (params.genre?.length > 0) {
+    newParams.with_genres = params.genre
+      .map((id: number) => id.toString())
+      .join(",");
+  }
+
+  if (params.platforms?.length > 0) {
+    newParams.with_watch_providers = params.platforms
+      .map((id: number) => id.toString())
+      .join(",");
+    newParams.watch_region = "KR";
+  }
+
+  if (params.region?.length > 0) {
+    newParams.with_original_language = params.region.join("|");
   }
 
   const response = await axios.get<Response<MovieData[]>>(
@@ -118,9 +121,8 @@ const discoverMovieList = async (params: DiscoverOptions) => {
       params: {
         api_key,
         language: "ko-KR",
-        ...params,
+        page: params.page,
         ...newParams,
-        watch_region: "KR",
       },
     }
   );

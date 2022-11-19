@@ -1,7 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { discoverMovieList, DiscoverOptions } from "@apis/index";
+import { discoverMovieList } from "@apis/index";
+import { useRecoilValue } from "recoil";
+import { discoverOptionState } from "@recoil/discover";
 
-export function useDiscoverMovie(params?: DiscoverOptions) {
+export function useDiscoverMovie() {
+  const params = useRecoilValue(discoverOptionState);
   return useInfiniteQuery(
     ["movie-discover"],
     ({ pageParam = 1 }) => discoverMovieList({ ...params, page: pageParam }),
