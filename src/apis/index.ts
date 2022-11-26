@@ -95,7 +95,9 @@ const getGenreList = async () => {
   return response.data.genres;
 };
 
-const discoverMovieList = async (params: Filter & { page: number }) => {
+const discoverMovieList = async (
+  params: Filter & { sort_by: string; page: number }
+) => {
   let newParams = {} as { [key in keyof DiscoverOptions]?: string };
 
   if (params.genre?.length > 0) {
@@ -121,6 +123,7 @@ const discoverMovieList = async (params: Filter & { page: number }) => {
       params: {
         api_key,
         language: "ko-KR",
+        sort_by: params.sort_by,
         page: params.page,
         ...newParams,
       },

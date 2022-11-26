@@ -14,3 +14,8 @@ export const discoverOptionState = atom<Filter>({
     region: [],
   },
 });
+
+export const discoverSortState = atom<string>({
+  key: "sortState",
+  default: "popularity.desc",
+});
