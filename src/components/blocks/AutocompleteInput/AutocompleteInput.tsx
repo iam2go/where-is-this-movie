@@ -62,15 +62,15 @@ function AutocompleteInput({
         </IconWrap>
       </InputWrap>
       <ErrorBoundary FallbackComponent={ResultBoxErrorBox}>
-      <Suspense fallback={<ResultBoxLoader />}>
-        {value && !hideResult && (
-          <ResultBox
-            keyword={debouncedValue}
-            onClick={onClickResult}
-            onClickMore={onClickMore}
-          />
-        )}
-      </Suspense>
+        <Suspense fallback={<ResultBoxLoader />}>
+          {value && !hideResult && (
+            <ResultBox
+              keyword={debouncedValue}
+              onClick={onClickResult}
+              onClickMore={onClickMore}
+            />
+          )}
+        </Suspense>
       </ErrorBoundary>
     </AutocompleteBox>
   );

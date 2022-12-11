@@ -41,8 +41,7 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
       window.removeEventListener("keyup", listener);
     };
   }, [data, handleClickMore, onClick, selected]);
-
-  return (
+  return keyword ? (
     <ResultBoxWrap>
       {data?.length === 0 && <p>찾으시는 검색 결과가 없습니다 😥</p>}
       {data &&
@@ -70,7 +69,7 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
         </ShowMore>
       )}
     </ResultBoxWrap>
-  );
+  ) : null;
 }
 
 export function ResultBoxLoader() {
@@ -81,15 +80,21 @@ export function ResultBoxLoader() {
   );
 }
 
-
-export function ResultBoxErrorBox({resetErrorBoundary} : {resetErrorBoundary: () => void}) {
+export function ResultBoxErrorBox({
+  resetErrorBoundary,
+}: {
+  resetErrorBoundary: () => void;
+}) {
   setTimeout(() => {
     resetErrorBoundary();
   }, 1000);
 
   return (
     <ResultBoxWrap>
-      <p>문제가 발생했습니다. <br/>잠시 후 다시 시도해주세요.</p>
+      <p>
+        문제가 발생했습니다. <br />
+        잠시 후 다시 시도해주세요.
+      </p>
     </ResultBoxWrap>
   );
 }
