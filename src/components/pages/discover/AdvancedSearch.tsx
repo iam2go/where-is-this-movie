@@ -3,13 +3,17 @@ import TopButton from "@blocks/TopButton";
 import Filter from "./Filter";
 import Header from "@blocks/Header";
 import DiscoverResult from "./DiscoverResult";
+import OptionBar from "@blocks/OptionBar";
 
 function Discover() {
   return (
     <>
       <Header />
       <ContentWrap>
-        <Filter />
+        <NavBar>
+          <Filter />
+          <OptionBar />
+        </NavBar>
         <DiscoverResult />
       </ContentWrap>
       <TopButton />
@@ -17,6 +21,10 @@ function Discover() {
   );
 }
 
+const NavBar = styled.div`
+  display: flex;
+  align-items: center;
+`;
 const ContentWrap = styled.div`
   width: 100%;
   height: fit-content;
@@ -25,6 +33,7 @@ const ContentWrap = styled.div`
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   margin-top: 5rem;
 `;
 

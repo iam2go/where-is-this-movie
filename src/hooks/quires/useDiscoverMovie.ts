@@ -8,7 +8,7 @@ export function useDiscoverMovie() {
   const sort_by = useRecoilValue(discoverSortState);
 
   return useInfiniteQuery(
-    ["movie-discover", sort_by],
+    ["movie-discover", params, sort_by],
     ({ pageParam = 1 }) =>
       discoverMovieList({ ...params, sort_by, page: pageParam }),
     {

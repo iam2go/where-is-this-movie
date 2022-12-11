@@ -2,6 +2,7 @@ import FilterButton from "@blocks/FilterButton/FilterButton";
 import { useCallback, useState } from "react";
 
 import DiscoverDialog from "@blocks/Dialog/DiscoverDialog";
+import styled from "styled-components";
 
 function Filter() {
   const [open, setOpen] = useState(false);
@@ -15,11 +16,15 @@ function Filter() {
   }, []);
 
   return (
-    <div>
+    <ButtonWrap>
       <FilterButton on={open} onClick={onClick} />
       {open && <DiscoverDialog isOpen={open} onClose={onClose} />}
-    </div>
+    </ButtonWrap>
   );
 }
+
+const ButtonWrap = styled.div`
+  margin-right: 0.6rem;
+`;
 
 export default Filter;
