@@ -4,6 +4,7 @@ export type Filter = {
   platforms: number[];
   genre: number[];
   region: string[];
+  keyword: string[];
 };
 
 export const discoverOptionState = atom<Filter>({
@@ -12,6 +13,7 @@ export const discoverOptionState = atom<Filter>({
     platforms: [],
     genre: [],
     region: [],
+    keyword: [],
   },
 });
 

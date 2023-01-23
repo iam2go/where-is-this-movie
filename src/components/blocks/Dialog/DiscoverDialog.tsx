@@ -5,11 +5,12 @@ import {
   RegionsOption,
 } from "@blocks/SearchOption/SearchOption";
 import { useDiscoverMovie } from "@hooks/quires/useDiscoverMovie";
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, Suspense } from "react";
 import { useRecoilState } from "recoil";
 import { discoverOptionState } from "@recoil/discover";
 import styled from "styled-components";
 import Dialog from "./Dialog";
+import { ErrorBoundary } from "react-error-boundary";
 
 /* 파일 위치 고민중......... */
 
@@ -22,6 +23,7 @@ export type Filter = {
   platforms: number[];
   genre: number[];
   region: string[];
+  keyword?: string[];
 };
 
 function DiscoverDialog({ onClose }: Props) {
@@ -66,9 +68,13 @@ function DiscoverDialog({ onClose }: Props) {
       Buttons={<DiscoverButton onClick={onClickDiscover} count={optionCount} />}
     >
       <Wrap>
-        <PlatformsOption onClick={onChange} data={filter.platforms} />
-        <GenresOption onClick={onChange} data={filter.genre} />
-        <RegionsOption onClick={onChange} data={filter.region} />
+        <ErrorBoundary fallback={<></>}>
+          <Suspense fallback={<></>}>
+            <PlatformsOption onClick={onChange} data={filter.platforms} />
+            <GenresOption onClick={onChange} data={filter.genre} />
+            <RegionsOption onClick={onChange} data={filter.region} />
+          </Suspense>
+        </ErrorBoundary>
       </Wrap>
     </Dialog>
   );
