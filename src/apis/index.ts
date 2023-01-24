@@ -117,6 +117,10 @@ const discoverMovieList = async (
     newParams.with_original_language = params.region.join("|");
   }
 
+  if (params.keyword?.length > 0) {
+    newParams.with_keywords = params.keyword.join(",");
+  }
+
   const response = await axios.get<Response<MovieData[]>>(
     `${TMDB_API}/discover/movie`,
     {

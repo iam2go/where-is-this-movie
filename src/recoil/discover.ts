@@ -10,7 +10,7 @@ export type Filter = {
 export const discoverOptionState = atom<Filter>({
   key: "optionState",
   default: {
-    platforms: [],
+    platforms: [8],
     genre: [],
     region: [],
     keyword: [],

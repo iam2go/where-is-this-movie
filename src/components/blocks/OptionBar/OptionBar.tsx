@@ -63,7 +63,6 @@ function OptionBar() {
   };
 
   useEffect(() => {
-    console.log(discoverFilters);
     let changeTheme = null;
     Themes.forEach((theme) => {
       if (
