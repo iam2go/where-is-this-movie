@@ -8,14 +8,14 @@ import ProviderList from "./ProviderList";
 
 type Props = {
   data: MovieData;
-  onClick: (id: number) => void;
+  onClick: (id: number, backdrop: string) => void;
   keyword: string;
 };
 function SearchItem({ data, onClick, keyword }: Props) {
   const { data: info } = useMovieDetail(data.id.toString());
 
   return (
-    <Wrap onClick={() => onClick(data.id)}>
+    <Wrap onClick={() => onClick(data.id, data.backdrop_path)}>
       <Poster url={data.poster_path} width={10} />
       <InfoBox>
         <h2>

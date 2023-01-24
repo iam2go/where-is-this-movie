@@ -10,7 +10,7 @@ import useOutsideClick from "@hooks/useOutsideClick";
 type Props = {
   width?: string;
   placeholder?: string;
-  onClickResult: (id: number) => void;
+  onClickResult: (id: number, backDrop: string) => void;
   onClickMore: (keyword: string) => void;
 };
 

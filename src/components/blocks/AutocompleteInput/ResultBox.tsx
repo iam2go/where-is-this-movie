@@ -5,7 +5,7 @@ import { HighlightWord } from "@atoms/text";
 
 type Props = {
   keyword: string;
-  onClick: (id: number) => void;
+  onClick: (id: number, backDrop: string) => void;
   onClickMore: (keyword: string) => void;
 };
 
@@ -25,7 +25,7 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
         if (selected === data.length) {
           handleClickMore();
         } else {
-          onClick(data[selected].id);
+          onClick(data[selected].id, data[selected].backdrop_path);
         }
       }
       if (e.key === "ArrowUp") {
@@ -49,7 +49,7 @@ function ResultBox({ keyword, onClick, onClickMore }: Props) {
           <ResultItem
             key={index}
             onMouseEnter={() => setSelected(-1)}
-            onClick={() => onClick(info.id as number)}
+            onClick={() => onClick(info.id as number, info.backdrop_path)}
             active={selected === index}
             tabIndex={0}
           >

@@ -1,4 +1,4 @@
-import { Suspense, useCallback,  useMemo } from "react";
+import { Suspense, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useInfiniteSearch } from "@hooks/quires/useSearchMovie";
@@ -9,24 +9,33 @@ type Props = {
   keyword: string;
 };
 
-const options = { threshold: 1.0};
+const options = { threshold: 1.0 };
 function SearchList({ keyword }: Props) {
-  const { data, fetchNextPage, hasNextPage} = useInfiniteSearch(keyword);
+  const { data, fetchNextPage, hasNextPage } = useInfiniteSearch(keyword);
   const navigate = useNavigate();
 
-  const onClick = (movieID: number) => {
-    navigate(`/detail/${movieID}`);
+  const onClick = (movieID: number, backdrop: string) => {
+    navigate(`/detail/${movieID}`, {
+      state: {
+        backdrop,
+      },
+    });
   };
 
-  const onIntersect = useCallback(([entry] : IntersectionObserverEntry[]) => {
-    if(entry.isIntersecting && hasNextPage){
-      fetchNextPage();
-    }
-  },[fetchNextPage, hasNextPage]);
+  const onIntersect = useCallback(
+    ([entry]: IntersectionObserverEntry[]) => {
+      if (entry.isIntersecting && hasNextPage) {
+        fetchNextPage();
+      }
+    },
+    [fetchNextPage, hasNextPage]
+  );
 
-  const target  = useIntersectionObserver(onIntersect, options);
-  const movieList = useMemo(() => data ? data.pages.flatMap(({results}) => results) : [], [data]);
-
+  const target = useIntersectionObserver(onIntersect, options);
+  const movieList = useMemo(
+    () => (data ? data.pages.flatMap(({ results }) => results) : []),
+    [data]
+  );
 
   return (
     <>
@@ -41,7 +50,7 @@ function SearchList({ keyword }: Props) {
       {data?.pages[0].total_results === 0 && (
         <AlertMessage>키워드와 일치하는 영화가 없습니다😥</AlertMessage>
       )}
-       <Observer ref={target} />
+      <Observer ref={target} />
     </>
   );
 }
@@ -53,6 +62,6 @@ const AlertMessage = styled.div`
 
 const Observer = styled.div`
   height: 2rem;
-`
+`;
 
 export default SearchList;

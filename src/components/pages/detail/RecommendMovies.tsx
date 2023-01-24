@@ -22,9 +22,13 @@ function RecommendMovies({ id }: Props) {
   }, [data, index]);
 
   const onClickMovieItem = useCallback(
-    (movieID: number) => {
+    (movieID: number, backdrop: string) => {
       if (!movieID) return;
-      navigate(`/detail/${movieID}`);
+      navigate(`/detail/${movieID}`, {
+        state: {
+          backdrop,
+        },
+      });
     },
     [navigate]
   );
@@ -39,7 +43,10 @@ function RecommendMovies({ id }: Props) {
       }
       <MovieList>
         {data?.list.map((movie) => (
-          <MovieItem key={movie.id} onClick={() => onClickMovieItem(movie.id)}>
+          <MovieItem
+            key={movie.id}
+            onClick={() => onClickMovieItem(movie.id, movie.backdrop_path)}
+          >
             <Poster url={movie.poster_path} />
             <h3>{movie.title}</h3>
             <sub>({movie.release_date.split("-")[0]})</sub>

@@ -5,8 +5,12 @@ import AutocompleteInput from "@blocks/AutocompleteInput";
 
 function Main() {
   const navigate = useNavigate();
-  const onClickResult = (movieID: number) => {
-    navigate(`/detail/${movieID}`);
+  const onClickResult = (movieID: number, backdrop: string) => {
+    navigate(`/detail/${movieID}`, {
+      state: {
+        backdrop,
+      },
+    });
   };
   const onClickMore = (keyword: string) => {
     navigate(`/search?keyword=${keyword}`);

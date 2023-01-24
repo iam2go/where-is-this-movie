@@ -10,6 +10,7 @@ export type MovieData = {
   release_date: string;
   title: string;
   popularity: number;
+  backdrop_path: string;
 };
 
 type Response<T> = {
