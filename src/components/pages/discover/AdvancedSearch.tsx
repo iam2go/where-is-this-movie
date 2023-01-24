@@ -4,8 +4,19 @@ import Filter from "./Filter";
 import Header from "@blocks/Header";
 import DiscoverResult from "./DiscoverResult";
 import OptionBar from "@blocks/OptionBar";
+import { useEffect } from "react";
+import { useResetRecoilState } from "recoil";
+import { discoverOptionState } from "@recoil/discover";
 
 function Discover() {
+  const resetOption = useResetRecoilState(discoverOptionState);
+
+  useEffect(
+    () => () => {
+      resetOption();
+    },
+    [resetOption]
+  );
   return (
     <>
       <Header />
